@@ -2,6 +2,9 @@
 export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxtjs/tailwindcss'],
+  plugins: [
+    { src: '~/plugins/jquery.js', mode: 'client' },
+  ],
   runtimeConfig: {
     // The private keys which are only available server-side
     apiSecret: '123',
