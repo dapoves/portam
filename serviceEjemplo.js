@@ -35,3 +35,6 @@ export default{
     return apiClient.post('/coches', coche)
   }
 }
+
+import CocheService from "@/services/CocheService";
+import funciones from '~/store/funciones.js'
