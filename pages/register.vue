@@ -36,10 +36,29 @@
 </template>
 
 <script>
+import LoginService from "@/services/LoginService";
+
 export default {
     methods: {
         register() {
-            console.log($('#nombre').val());
+            let data = new FormData();
+            data.append('nombre', $('#nombre').val());
+            data.append('email', $('#email').val());
+            data.append('password', $('#password').val());
+            data.append('repassword', $('#repassword').val());
+            data.append('telefono', $('#telefono').val());
+            LoginService.register(data)
+                .then(response => {
+                    if (response.status == 'ok') {
+                        this.$router.push('/index');
+                    } else {
+                        alert('error');
+                    }
+                })
+                .catch(e => {
+                    console.log(e);
+                    alert(e.response.data.message);
+                });
         }
     }
 
