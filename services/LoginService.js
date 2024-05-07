@@ -18,6 +18,9 @@ export default {
     },
     register(usuario) {
         return apiClient.post('/register', usuario)
+    },
+    isAuthenticated() {
+        return apiClient.get('/user')
     }
 }
     

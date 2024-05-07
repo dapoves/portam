@@ -49,15 +49,21 @@ export default {
             data.append('telefono', $('#telefono').val());
             LoginService.register(data)
                 .then(response => {
-                    if (response.status == 'ok') {
-                        this.$router.push('/index');
+                    if (response.data.status == 'ok') {
+                        this.$swal({
+                            title: 'Bienvenido' + response.data.user.nombre,
+                            text: response.data.message,
+                            icon: 'success',
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                        navigateTo('/');
                     } else {
-                        alert('error');
+                        this.$swal('Error', response.data.message, 'error');
                     }
                 })
                 .catch(e => {
-                    console.log(e);
-                    alert(e.response.data.message);
+                    this.$swal('Error', e.errors, 'error');
                 });
         }
     }

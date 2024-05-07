@@ -13,8 +13,10 @@
     "axios": "^1.6.8",
     "jquery": "^3.7.1",
     "nuxt": "^3.11.2",
+    "sweetalert2": "^11.10.8",
     "vue": "^3.4.21",
-    "vue-router": "^4.3.0"
+    "vue-router": "^4.3.0",
+    "vue-sweetalert2": "^5.0.5"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.0"

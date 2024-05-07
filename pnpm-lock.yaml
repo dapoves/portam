@@ -14,12 +14,18 @@ dependencies:
   nuxt:
     specifier: ^3.11.2
     version: 3.11.2(@unocss/reset@0.59.4)(axios@1.6.8)(floating-vue@5.2.2)(unocss@0.59.4)(vite@5.2.10)
+  sweetalert2:
+    specifier: ^11.10.8
+    version: 11.10.8
   vue:
     specifier: ^3.4.21
     version: 3.4.26
   vue-router:
     specifier: ^4.3.0
     version: 4.3.2(vue@3.4.26)
+  vue-sweetalert2:
+    specifier: ^5.0.5
+    version: 5.0.5(vue@3.4.26)
 
 devDependencies:
   '@nuxtjs/tailwindcss':
@@ -6265,6 +6271,10 @@ packages:
       picocolors: 1.0.0
     dev: false
 
+  /sweetalert2@11.10.8:
+    resolution: {integrity: sha512-oAkYROBfXBY+4sVbQEIcN+ZxAx69lsmz5WEBwdEpyS4m59vOBNlRU5/fJpAI1MVfiDwFZiGwVzB/KBpOyfLNtg==}
+    dev: false
+
   /system-architecture@0.1.0:
     resolution: {integrity: sha512-ulAk51I9UVUyJgxlv9M6lFot2WP3e7t8Kz9+IS6D4rVba1tR9kON+Ey69f+1R4Q8cd45Lod6a4IcJIxnzGc/zA==}
     engines: {node: '>=18'}
@@ -6987,6 +6997,15 @@ packages:
       vue: ^3.2.0
     dependencies:
       '@vue/devtools-api': 6.6.1
+      vue: 3.4.26
+    dev: false
+
+  /vue-sweetalert2@5.0.5(vue@3.4.26):
+    resolution: {integrity: sha512-Q7+TjQxNwGruT2jfPaSKMz18HHWs81r4umEwlrrtOf/QL5Iwl1T+tUaNkcvKB7Rf9rYftubt7NnOMjfDMnDH3A==}
+    peerDependencies:
+      vue: '*'
+    dependencies:
+      sweetalert2: 11.10.8
       vue: 3.4.26
     dev: false
 
