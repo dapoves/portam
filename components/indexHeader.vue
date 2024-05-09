@@ -1,0 +1,13 @@
+<template>
+    <div>
+        <header class="m-6 pt-5 flex justify-between items-center text-2xl font-noto-sans" >
+            <IconAlignJustify :size="30" />
+            <div style="width: 70%;" class="flex items-center">
+                <h1 class="ml-2 mr-2 mb-1 text-neutral-600">Les valls </h1>
+                <IconChevronRight color="gray" stroke-width="2"/>
+            </div>
+            <IconBike :size="30"/>
+        </header>
+        </div>
+</template>
+

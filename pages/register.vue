@@ -51,7 +51,7 @@ export default {
                 .then(response => {
                     if (response.data.status == 'ok') {
                         this.$swal({
-                            title: 'Bienvenido' + response.data.user.nombre,
+                            title: 'Bienvenid@' + response.data.user.nombre,
                             text: response.data.message,
                             icon: 'success',
                             showConfirmButton: false,

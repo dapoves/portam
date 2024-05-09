@@ -1,16 +1,16 @@
 <template>
   <div>
-    <h1>Hola que tal</h1>
-    <button @click="logout">Salir</button>
+    <IndexHeader></IndexHeader>
+    <CategoryList></CategoryList>
   </div>
 </template>
 
 <script>
 import LoginService from "@/services/LoginService";
 
-definePageMeta({
-  middleware: 'auth'
-})
+// definePageMeta({
+//   middleware: 'auth'
+// })
 
 export default {
   methods: {
@@ -36,6 +36,5 @@ form {
   margin: 0 auto;
   margin-top: 30px;
   max-width: 450px;
-
 }
 </style>

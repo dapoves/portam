@@ -5,7 +5,7 @@
         <h1>Porta'm</h1>
         <h1 class="primary_color">Delivery</h1>
       </div>
-      <form class="flex flex-col w-full h-full pb-6 text-center rounded-3xl">
+      <form @submit.prevent="login" class="flex flex-col w-full h-full pb-6 text-center rounded-3xl">
         <h3 class="mb-3 text-4xl font-extrabold text-dark-grey-900">Iniciar Sesión</h3>
         <a
           class="flex items-center justify-center w-full py-4 mb-6 mt-10 text-sm font-medium transition duration-300 rounded-2xl text-grey-900 bg-slate-200 hover:bg-slate-300 focus:ring-4 focus:bg-slate-100">
@@ -46,9 +46,42 @@
   </template>
   
   <script>
+  import LoginService from "@/services/LoginService";
+
   export default {
-  
+    methods: {
+      login() {
+        let data = new FormData();
+        data.append('email', $('#email').val());
+        data.append('password', $('#password').val());
+        LoginService.login(data)
+          .then(response => {
+            console.log(response);
+            if (response.data.status == 'ok') {
+              this.$swal({
+                title: 'Hola de nuevo, ' + response.data.user.nombre,
+                text: response.data.message,
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+              navigateTo('/');
+            } else {
+              this.$swal({
+                title: 'Error',
+                text: response.data.message,
+                icon: 'error',
+                showConfirmButton: false,
+                timer: 1500,
+              });
+            }
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    }
   }
+}
   </script>
   
   <style scoped>
@@ -57,6 +90,5 @@
     margin: 0 auto;
     margin-top: 30px;
     max-width: 450px;
-
   }
   </style>
