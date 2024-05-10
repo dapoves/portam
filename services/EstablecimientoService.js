@@ -13,5 +13,8 @@ export default {
     getCategorias() {
         return apiClient.get('/categorias')
     },
+    getEstablecimientos() {
+        return apiClient.get('/establecimientos')
+    }
 }
     

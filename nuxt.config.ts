@@ -14,7 +14,11 @@ export default defineNuxtConfig({
   app: {
     head: {
       script: [
-        { src: 'https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js'}
+        { src: 'https://unpkg.com/@material-tailwind/html@latest/scripts/script-name.js'},
+        {
+          async: true,
+          src: "https://unpkg.com/@material-tailwind/html/scripts/ripple.js",
+        }
       ],
       link: [
         // <link rel="stylesheet" href="https://myawesome-lib.css">

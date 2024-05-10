@@ -2,32 +2,23 @@
   <div>
     <IndexHeader></IndexHeader>
     <CategoryList></CategoryList>
+    <EstablishmentCard v-for="stablish in stablishments" :key="stablish.id" :stablish="stablish"></EstablishmentCard>
   </div>
 </template>
 
-<script>
-import LoginService from "@/services/LoginService";
+<script setup>
+import { onMounted, ref } from 'vue';
+import EstablecimientoService from '@/services/EstablecimientoService';
 
-// definePageMeta({
-//   middleware: 'auth'
-// })
+let stablishments = ref([]);
 
-export default {
-  methods: {
-    logout() {
-      console.log('logout');
-      LoginService.logout().then(() => {
-        if (response.data.status == 'ok') {
-          console.log(response.data.message);
-          this.$swal('Sesión cerrada', 'Hasta luego', 'success');
-        } else {
-          this.$swal('Error', response.data.message, 'error');
-        }
-      });
-    }
-  }
-
+function getEstablishments() {
+  EstablecimientoService.getEstablecimientos().then((response) => {
+    stablishments.value = response.data;
+  });
 }
+
+onMounted(getEstablishments);
 </script>
 
 <style scoped>
