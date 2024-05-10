@@ -27,5 +27,9 @@
   .primary_color {
   color: #9139BA;
   }
+  p {
+    font-family: Poppins;
+    font-size: 12px;
+  }
   </style>
   
