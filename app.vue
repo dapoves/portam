@@ -17,6 +17,7 @@
   html {
   max-width: 100vw;
   overflow-x: hidden;
+  padding-bottom: 40px;
 }
 
 * {
@@ -29,7 +30,6 @@
   }
   p {
     font-family: Poppins;
-    font-size: 12px;
   }
   </style>
   

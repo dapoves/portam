@@ -4,7 +4,7 @@ import LoginService from "@/services/LoginService";
 export default defineNuxtRouteMiddleware((to, from) => {
   LoginService.isAuthenticated().then((isAuthenticated) => {
     if (!isAuthenticated.data) {
-      console.log("Not authenticated, redirecting to login page");
+      console.log(isAuthenticated);
       navigateTo("/login");
     }
   });

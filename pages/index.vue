@@ -9,6 +9,11 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import EstablecimientoService from '@/services/EstablecimientoService';
+import LoginService from '@/services/LoginService';
+
+// definePageMeta({
+//   middleware: 'auth'
+// })
 
 let stablishments = ref([]);
 
@@ -17,6 +22,14 @@ function getEstablishments() {
     stablishments.value = response.data;
   });
 }
+
+function checkAuth() {
+  LoginService.isAuthenticated().then((response) => {
+    console.log(response);
+  });
+}
+
+onMounted(checkAuth);
 
 onMounted(getEstablishments);
 </script>

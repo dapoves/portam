@@ -15,6 +15,18 @@ export default {
     },
     getEstablecimientos() {
         return apiClient.get('/establecimientos')
-    }
+    },
+    getEstablecimiento(id) {
+      return apiClient.get('/establecimientos/' + id)
+    },
+    getProductos(id) {
+        return apiClient.get('/establecimientos/' + id + '/productos')
+    },
+    getPoblaciones() {
+        return apiClient.get('/poblaciones')
+    },
+    getPoblacion(id) {
+      return apiClient.get('/poblaciones/' + id)
+    },
 }
     
