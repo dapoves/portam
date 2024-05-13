@@ -13,6 +13,7 @@ export const mutations = {
   }
 }
 
+// this.$store.dispatch('users/login', formdata)
 export const actions = {
   fetchCoches({ commit }) {
     return CocheService.getCoches().then(response => {
