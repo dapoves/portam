@@ -3,7 +3,8 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxtjs/tailwindcss',
-    'nuxt-lucide-icons'
+    'nuxt-lucide-icons',
+    '@pinia/nuxt'
   ],
   lucide: {
     namePrefix: 'Icon'

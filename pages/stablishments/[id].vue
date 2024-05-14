@@ -3,12 +3,13 @@
         <div>
             <nav
                 class="mt-20 flex justify-between sticky top-0 z-10 block w-full max-w-full rounded-3xl px-4 py-6 bg-white h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-6">
-                <IconChevronLeft stroke-width="2" />
+                <NuxtLink @click="$router.go(-1)" class="cursor-pointer">
+                    <IconChevronLeft stroke-width="2" />
+                </NuxtLink>
                 <p class="text-2xl">{{ stablish.nombre }}</p>
                 <IconPhone />
             </nav>
         </div>
-
         <div class="px-4 py-2 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <div v-for="product in products" :key="product.id"
                 class="group relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md transition-all duration-200">
@@ -35,8 +36,7 @@
                         <p class="mb-4 text-center">¿Añadir {{ product.nombre }} al pedido?</p>
                         <button
                             class="block w-full select-none rounded-lg bg-purple-700 py-3 px-6 text-center align-middle text-xs font-bold uppercase text-white transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-                            type="button"
-                            @click=addProduct(product)>
+                            type="button" @click=addProduct(product)>
                             AÑADIR {{ product.precio }}€
                         </button>
                     </div>
@@ -44,53 +44,57 @@
             </div>
         </div>
         <div v-if="order.length > 0" @click="checkout"
-             class="w-2/3 flex justify-between items-center mx-auto bg-purple-700 rounded-3xl text-white fixed bottom-0 p-1 inset-x-0 m-8">
-            <div class="bg-white rounded-full h-10 w-10 text-base font-bold text-black flex items-center justify-center">
+            class="w-2/3 flex justify-between items-center mx-auto bg-purple-700 rounded-3xl text-white fixed bottom-0 p-1 inset-x-0 m-8 transform transition-all hover:scale-105 cursor-pointer">
+            <div
+                class="bg-white rounded-full h-10 w-10 text-base font-bold text-black flex items-center justify-center">
                 <p>x{{ order.length }}</p>
             </div>
             <p>{{ parseFloat(precioTotal.toFixed(2)) }}€</p>
             <div class="flex items-center">
-                <p class="text-sm">Ir al Pedido</p>  
+                <p class="text-sm">Ir al Pedido</p>
                 <IconChevronRight color="white" stroke-width="2" />
             </div>
         </div>
     </div>
 </template>
-
-<script setup>
+<script>
+import { useRoute, useRouter } from 'vue-router';
 import EstablecimientoService from '@/services/EstablecimientoService';
+import { useOrderStore } from '~/stores/order';
 
-const route = useRoute()
-
-let order = ref([]);
-let precioTotal = ref(0);
-let stablish = ref({});
-let products = ref([]);
-function getStablishment() {
-    EstablecimientoService.getEstablecimiento(route.params.id).then((response) => {
-        stablish.value = response.data;
-    });
-}
-
-function getProducts() {
-    EstablecimientoService.getProductos(route.params.id).then((response) => {
-        products.value = response.data;
-    });
-}
-
-function addProduct(product) {
-    order.value.push(product);
-    precioTotal.value += parseFloat(product.precio.toFixed(2));
+export default {
+  data() {
+    return {
+      order: [],
+      precioTotal: 0,
+      stablish: {},
+      products: [],
+      orderStore: useOrderStore(),
+    };
+  },
+  methods: {
+    getStablishment() {
+      EstablecimientoService.getEstablecimiento(this.$route.params.id).then((response) => {
+        this.stablish = response.data;
+      });
+    },
+    getProducts() {
+      EstablecimientoService.getProductos(this.$route.params.id).then((response) => {
+        this.products = response.data;
+      });
+    },
+    addProduct(product) {
+      this.order.push(product);
+      this.precioTotal += parseFloat(product.precio.toFixed(2));
+    },
+    checkout() {
+      console.log(this.order);
+      this.$store.dispatch('setProductos', this.order);
+    },
+  },
+  mounted() {
+    this.getStablishment();
+    this.getProducts();
+  },
 };
-
-function checkout() {
-    console.log(order.value);
-    console.log(precioTotal.value);
-}
-
-onMounted(() => {
-    getStablishment();
-    getProducts();
-});
-
 </script>
