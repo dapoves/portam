@@ -88,10 +88,14 @@ export default {
       this.precioTotal += parseFloat(product.precio.toFixed(2));
     },
     checkout() {
-      console.log(this.order);
-      this.$store.dispatch('setProductos', this.order);
+      this.orderStore.setProducts(this.order);
+      this.orderStore.setStablish(this.stablish);
+      this.orderStore.setSubtotal(this.precioTotal);
+      this.orderStore.setCosteEnvio(this.stablish.costeEnvio);
+      navigateTo('/order');
     },
   },
+  
   mounted() {
     this.getStablishment();
     this.getProducts();

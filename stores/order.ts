@@ -2,10 +2,30 @@ import { defineStore } from 'pinia'
 
 export const useOrderStore = defineStore('order', {
   state: () => ({
-    products: 'holaaaaa'
+    products: '',
+    stablish: '',
+    subtotal: 0,
+    costeEnvio: 0,
   }),
+  actions: {
+    setProducts(products: string) {
+      this.products = products
+    },
+    setStablish(stablish: string) {
+      this.stablish = stablish
+    },
+    setSubtotal(subtotal: number) {
+      this.subtotal = subtotal
+    },
+    setCosteEnvio(costeEnvio: number) {
+      this.costeEnvio = costeEnvio
+    },
+  }
   
 })
+
+
+
 // this.$store.dispatch('users/login', formdata)
 // export const actions = {
 //   fetchCoches({ commit }) {
