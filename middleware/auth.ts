@@ -1,11 +1,14 @@
-import LoginService from "@/services/LoginService";
+import Swal from "sweetalert2"
 
 // ---cut---
 export default defineNuxtRouteMiddleware((to, from) => {
-  LoginService.isAuthenticated().then((isAuthenticated) => {
-    if (!isAuthenticated.data) {
-      console.log(isAuthenticated);
-      navigateTo("/login");
-    }
-  });
+  if (!window.localStorage.getItem('token')) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'You need to login first!'
+    })
+  } else {
+    console.log('You are logged in!')
+  }
 })

@@ -11,9 +11,9 @@ import { onMounted, ref } from 'vue';
 import EstablecimientoService from '@/services/EstablecimientoService';
 import LoginService from '@/services/LoginService';
 
-// definePageMeta({
-//   middleware: 'auth'
-// })
+definePageMeta({
+   middleware: 'auth'
+ })
 
 let stablishments = ref([]);
 

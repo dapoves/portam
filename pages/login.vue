@@ -58,6 +58,9 @@
           .then(response => {
             console.log(response);
             if (response.data.status == 'ok') {
+              localStorage.setItem('token', response.data.access_token);
+              localStorage.setItem('user_id', response.data.user.id);
+              localStorage.setItem('user_name', response.data.user.nombre);
               this.$swal({
                 title: 'Hola de nuevo, ' + response.data.user.nombre,
                 text: response.data.message,
