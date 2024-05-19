@@ -6,6 +6,7 @@ export const useOrderStore = defineStore('order', {
     stablish: '',
     subtotal: 0,
     costeEnvio: 0,
+    order: {},
   }),
   actions: {
     setProducts(products: string) {
@@ -19,6 +20,9 @@ export const useOrderStore = defineStore('order', {
     },
     setCosteEnvio(costeEnvio: number) {
       this.costeEnvio = costeEnvio
+    },
+    setOrder(order: any) {
+      this.order = order
     },
   }
   

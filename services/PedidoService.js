@@ -13,4 +13,10 @@ export default {
     createPedido(pedido) {
         return apiClient.post('/pedidos', pedido)
     },
+    addProduto(pedidoProducto) {
+        return apiClient.post(`/pedido/productos`, pedidoProducto)
+    },
+    getMisPedidos(id) {
+        return apiClient.get('/pedidos/mis-pedidos/' + id)
+    },
 }

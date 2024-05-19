@@ -72,7 +72,7 @@ let indicacionesExtra = ref('');
 let direccion = ref('');
 let precioTotal = (orderStore.subtotal + orderStore.costeEnvio).toFixed(2);
 
-function pagar() {
+async function pagar() {
     let pedido = new FormData();
     pedido.append('cliente_id', 1);
     pedido.append('establecimiento_id', orderStore.stablish.id);
@@ -81,9 +81,19 @@ function pagar() {
     pedido.append('direccion', direccion.value);
     pedido.append('indicaciones', indicacionesExtra.value);
 
-    PedidoService.createPedido(pedido).then((response) => {
-        console.log(response);
+    await PedidoService.createPedido(pedido).then((response) => {
+        orderStore.setOrder(response.data.pedido);
     });
+
+    orderStore.products.forEach((product) => {
+        let pedidoProducto = new FormData();
+        pedidoProducto.append('pedido_id', orderStore.order.id);
+        pedidoProducto.append('producto_id', product.id);
+        PedidoService.addProduto(pedidoProducto);
+    });
+    
+    navigateTo('/index');
+
 }
 
 function toggleTextarea() {
