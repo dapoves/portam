@@ -3,7 +3,7 @@
     <NuxtLink :to="`/stablishments/${stablish.id}`" class='w-full max-w-md  mx-auto bg-white rounded-3xl shadow hover:shadow-xl overflow-hidden'>
       <div class='max-w-md mx-auto'>
         <div class='h-[180px]'
-          style='background-image:url(https://img.freepik.com/free-photo/pasta-spaghetti-with-shrimps-sauce_1220-5072.jpg?w=2000&t=st=1678041911~exp=1678042511~hmac=e4aa55e70f8c231d4d23832a611004f86eeb3b6ca067b3fa0c374ac78fe7aba6);background-size:cover;background-position:center'>
+        :style="`background-image:url(${imagenUrl});background-size:cover;background-position:center`">
         </div>
         <div class='p-4 sm:p-6'>
           <p class='font-bold text-gray-700 text-[22px] leading-7 mb-1'>{{ stablish.nombre }}</p>
@@ -30,6 +30,8 @@ const props = defineProps({
   stablish: Object
 })
 
+const baseUrl = 'http://127.0.0.1:8000/storage/establecimientos/';
+let imagenUrl = baseUrl + props.stablish.imagen;
 let poblacion = ref('');
 
 function getPoblacion() {
@@ -37,6 +39,8 @@ function getPoblacion() {
     poblacion.value = response.data.nombre;
   });
 }
+
+
 
 onMounted(getPoblacion);
 </script>

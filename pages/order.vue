@@ -2,7 +2,6 @@
     <div>
         <GeneralHeader>Pedido</GeneralHeader>
         <OrderProduct v-for="product in orderStore.products" :key="product.id" :product="product" />
-        <hr class="border-t-4 mx-4">
         <div class="p-4">
             <p class="my-2 font-semibold text-[#171725]">Opciones de envío</p>
             <p class="my-3 font-semibold text-[#434E58]">{{ orderStore.stablish.nombre }}</p>

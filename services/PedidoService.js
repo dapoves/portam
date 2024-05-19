@@ -19,4 +19,10 @@ export default {
     getMisPedidos(id) {
         return apiClient.get('/pedidos/mis-pedidos/' + id)
     },
+    getPedido(id) {
+        return apiClient.get('/pedidos/' + id)
+    },
+    getProductosPedido(id) {
+        return apiClient.get('/pedido/' + id + '/productos')
+    }
 }

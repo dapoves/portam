@@ -1,4 +1,5 @@
 <template>
+  <div>
     <div class="flex items-start space-x-4 p-4 bg-white">
         <img :src="imagenUrl(props.product)" :alt="props.product.nombre" class="w-20 h-20 rounded-lg object-cover">
         <div class="space-y-1">
@@ -6,6 +7,8 @@
             <p class="font-semibold text-purple-800 text-sm">{{ props.product.precio }}€</p>
         </div>
     </div>
+    <hr class="border-t-2">
+  </div>
 </template>
 <script setup> 
 const props = defineProps({

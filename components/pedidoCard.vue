@@ -1,7 +1,8 @@
 <template>
     <div>
-        <div v-if="!isPasado" class="px-6 mb-6">
-            <div class="flex items-center">
+        <div v-if="!isPasado" class="mb-6 w-4/5 mx-auto">
+            <NuxtLink :to="`orders/${props.pedido.id}`">
+                <div class="flex items-center">
                 <IconCircleCheck v-if="props.pedido.estado != 'cancelado'" color="white" fill="#15803d" :size="18" />
                 <IconCircleX v-else color="red" :size="18" />
                 <p class="text-sm ml-1 mr-2" :class="props.pedido.estado !== 'cancelado' ? 'text-green-700' : 'text-red-600'">{{ props.pedido.estado }}</p>
@@ -27,9 +28,22 @@
                 :color="props.pedido.estado == 'entregado' ? '#9139BA' : '#9CA4AB'" />
             </div>
             <p class="text-gray-700">{{ info }}</p>
+            </NuxtLink> 
         </div>
-        <div v-else class="px-6 mb-6">
-            <img :src="imagenUrl(stablish)" class="w-24 h-24 rounded-lg object-cover shadow">
+        <div v-else>
+            <NuxtLink :to="`orders/${props.pedido.id}`" class="flex px-6 mb-6 items-center cursor-pointer">
+                <img :src="imagenUrl(stablish)" class="w-24 h-24 rounded-lg object-cover shadow">
+                <div class="pb-4">
+                    <div class="flex items-center pl-3">
+                        <IconCircleCheck v-if="props.pedido.estado != 'cancelado'" color="white" fill="#15803d" :size="18" />
+                        <IconCircleX v-else color="red" :size="18" />
+                        <p class="text-xs ml-1 mr-1" :class="props.pedido.estado !== 'cancelado' ? 'text-green-700' : 'text-red-600'">{{ props.pedido.estado }}</p>
+                        <p class="text-xs text-gray-500"> {{ fechaFormateada }}</p>
+                    </div>
+                    <p class="my-1 mx-4 font-semibold">{{ stablish.nombre }}</p>
+                </div>
+                <IconChevronRight class="ml-auto mr-6" color="#434E58" stroke-width="3" />
+            </NuxtLink>
         </div>
     </div>
 </template>
@@ -77,7 +91,6 @@ switch (props.pedido.estado) {
 }
 
 function imagenUrl(stablish) {
-  console.log(baseUrl + stablish.imagen);
   return baseUrl + stablish.imagen;
 }
 
