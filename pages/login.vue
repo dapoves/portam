@@ -56,7 +56,6 @@
         data.append('password', $('#password').val());
         LoginService.login(data)
           .then(response => {
-            console.log(response);
             if (response.data.status == 'ok') {
               localStorage.setItem('token', response.data.access_token);
               localStorage.setItem('user_id', response.data.user.id);

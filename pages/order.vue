@@ -73,7 +73,7 @@ let precioTotal = (orderStore.subtotal + orderStore.costeEnvio).toFixed(2);
 
 async function pagar() {
     let pedido = new FormData();
-    pedido.append('cliente_id', 1);
+    pedido.append('cliente_id', localStorage.getItem('user_id'));
     pedido.append('establecimiento_id', orderStore.stablish.id);
     pedido.append('tarjeta_id', 1);
     pedido.append('precioTotal', precioTotal);
@@ -90,9 +90,7 @@ async function pagar() {
         pedidoProducto.append('producto_id', product.id);
         PedidoService.addProduto(pedidoProducto);
     });
-    
-    navigateTo('/index');
-
+    navigateTo('/');
 }
 
 function toggleTextarea() {

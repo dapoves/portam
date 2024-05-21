@@ -1,13 +1,14 @@
 <template>
     <div>
         <div>
+            <img class="w-full h-40 object-cover absolute top-0" :src="`http://127.0.0.1:8000/storage/establecimientos/`+ stablish.imagen" />
             <nav
-                class="mt-20 flex justify-between sticky top-0 z-10 block w-full max-w-full rounded-3xl px-4 py-6 bg-white h-max border-white/80 bg-opacity-80 backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-6">
+                class="mt-20 flex justify-between sticky top-0 z-10 block w-full max-w-full rounded-t-full px-4 py-8 bg-white h-max backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-6">
                 <NuxtLink @click="$router.go(-1)" class="cursor-pointer">
-                    <IconChevronLeft stroke-width="2" />
+                    <IconChevronLeft class="ml-8" stroke-width="2" />
                 </NuxtLink>
                 <p class="text-2xl">{{ stablish.nombre }}</p>
-                <IconPhone />
+                <IconPhone class="mr-8" />
             </nav>
         </div>
         <div class="px-4 py-2 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

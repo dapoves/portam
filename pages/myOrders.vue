@@ -27,28 +27,34 @@
       </div>
   </div>
 </template>
-
-<script setup>
-import { ref } from 'vue';
+<script>
 import PedidoService from '~/services/PedidoService';
 
-const activeTab = ref('active');
-const pedidos = ref([]);
-const pedidosActivos = ref([]);
-const pedidosPasados = ref([]);
-
-PedidoService.getMisPedidos(1).then((response) => {
-  pedidos.value = response.data;
-  pedidosActivos.value = pedidos.value.filter(pedido => 
-    pedido.estado == 'pendiente' || 
-    pedido.estado == 'aceptado' || 
-    pedido.estado == 'en camino' || 
-    (pedido.estado == 'entregado' || pedido.estado == 'cancelado') && 
-    new Date(pedido.fechaPedido).toDateString() === new Date().toDateString()
-  );
-  pedidosPasados.value = pedidos.value.filter(pedido => 
-  (pedido.estado === 'cancelado' || pedido.estado === 'entregado') && 
-  new Date(pedido.fechaPedido).toDateString() !== new Date().toDateString()
-);
-});
+export default {
+  data() {
+    return {
+      userId: localStorage.getItem('user_id'),
+      activeTab: 'active',
+      pedidos: [],
+      pedidosActivos: [],
+      pedidosPasados: [],
+    };
+  },
+  mounted() {
+    PedidoService.getMisPedidos(this.userId).then((response) => {
+      this.pedidos = response.data;
+      this.pedidosActivos = this.pedidos.filter(pedido => 
+        pedido.estado == 'pendiente' || 
+        pedido.estado == 'aceptado' || 
+        pedido.estado == 'en camino' || 
+        (pedido.estado == 'entregado' || pedido.estado == 'cancelado') && 
+        new Date(pedido.fechaPedido).toDateString() === new Date().toDateString()
+      );
+      this.pedidosPasados = this.pedidos.filter(pedido => 
+        (pedido.estado === 'cancelado' || pedido.estado === 'entregado') && 
+        new Date(pedido.fechaPedido).toDateString() !== new Date().toDateString()
+      );
+    });
+  }
+}
 </script>
