@@ -18,29 +18,9 @@ definePageMeta({
   pageTransition: {
     name: 'slide-left',
     mode: 'out-in',
-    onBeforeEnter(el) {
-      console.log('Before enter...');
-    },
-    onEnter(el, done) {
-      done();
-    },
-    onAfterEnter(el) {
-      console.log('After enter');
-    }
   }
 })
 </script>
 
-<style scoped>
-.slide-left-enter-active, .slide-left-leave-active {
-  transition: transform 0.5s ease;
-}
-
-.slide-left-enter, .slide-left-leave-to {
-  transform: translateX(100%);
-}
-
-.slide-left-leave-active {
-  position: absolute;
-}
+<style>
 </style>

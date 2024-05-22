@@ -1,11 +1,6 @@
 <template>
-    <div>
-      
-        <NuxtLayout>
-            <NuxtPage />
-        </NuxtLayout>
-    </div>
-  </template>
+    <NuxtPage />
+</template>
   
   <script>
   export default {
@@ -13,7 +8,18 @@
   }
   </script>
   
-  <style>
+<style>
+.slide-left-enter-active, .slide-left-leave-active {
+  transition: transform 2s ease;
+}
+
+.slide-left-enter, .slide-left-leave-to {
+  transform: translateX(100%);
+}
+
+.slide-left-leave-active {
+  position: absolute;
+}
   html {
   max-width: 100vw;
   overflow-x: hidden;
