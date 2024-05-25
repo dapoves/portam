@@ -1,7 +1,7 @@
 <template>
     <div>
         <header class="m-6 pt-5 flex justify-between items-center text-2xl font-noto-sans" >
-            <NuxtLink to="/account">
+            <NuxtLink to="/menu">
                 <IconAlignJustify :size="30"/>
             </NuxtLink>
             <div style="width: 70%;" class="flex items-center">
