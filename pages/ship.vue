@@ -21,7 +21,7 @@
             </div>
             <p class="font-semibold pt-6 pb-1">Descripción del paquete:</p>
             <textarea v-model="descripcion" class="w-full rounded-lg border border-gray-300 p-2 mt-2" rows="2"
-                placeholder="Describe aquí el paquete que quieres enviar"></textarea>
+                placeholder="¿Qué quieres enviar?"></textarea>
             <p class="font-semibold pt-5 pb-1">Dirección de Recogida</p>
             
             <div class="flex">
@@ -135,6 +135,8 @@ export default {
             envio.append('tipo', vm.tipoEnvio);
             console.log(vm.tipoEnvio);
             envio.append('descripcion', vm.descripcion);
+            envio.append('direccionRecogida', vm.direccionRecogida);
+            envio.append('direccionEntrega', vm.direccionEntrega);
             envio.append('destino_id', vm.poblacionDestino);
             envio.append('origen_id', vm.poblacionOrigen);
             envio.append('cliente_id', localStorage.getItem('user_id'));

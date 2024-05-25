@@ -10,6 +10,15 @@ const apiClient = axios.create({
 })
 
 export default {
+    getEnvios() {
+        return apiClient.get('/envios')
+    },
+    getEnvio(id) {
+        return apiClient.get('/envios/' + id)
+    },
+    getMisEnvios(id) {
+        return apiClient.get('/envios/mis-envios/' + id)
+    },
     createEnvio(envio) {
         return apiClient.post('/envios', envio)
     },

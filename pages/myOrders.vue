@@ -31,30 +31,33 @@
 import PedidoService from '~/services/PedidoService';
 
 export default {
-  data() {
-    return {
-      userId: localStorage.getItem('user_id'),
-      activeTab: 'active',
-      pedidos: [],
-      pedidosActivos: [],
-      pedidosPasados: [],
-    };
-  },
-  mounted() {
-    PedidoService.getMisPedidos(this.userId).then((response) => {
-      this.pedidos = response.data;
-      this.pedidosActivos = this.pedidos.filter(pedido => 
-        pedido.estado == 'pendiente' || 
-        pedido.estado == 'aceptado' || 
-        pedido.estado == 'en camino' || 
-        (pedido.estado == 'entregado' || pedido.estado == 'cancelado') && 
-        new Date(pedido.fechaPedido).toDateString() === new Date().toDateString()
-      );
-      this.pedidosPasados = this.pedidos.filter(pedido => 
-        (pedido.estado === 'cancelado' || pedido.estado === 'entregado') && 
-        new Date(pedido.fechaPedido).toDateString() !== new Date().toDateString()
-      );
-    });
-  }
+    data() {
+        return {
+            userId: null,
+            activeTab: 'active',
+            pedidos: [],
+            pedidosActivos: [],
+            pedidosPasados: [],
+        };
+    },
+    mounted() {
+        this.userId = localStorage.getItem('user_id');
+        if (this.userId) {
+            PedidoService.getMisPedidos(this.userId).then((response) => {
+                this.pedidos = response.data;
+                this.pedidosActivos = this.pedidos.filter(pedido => 
+                    pedido.estado == 'pendiente' || 
+                    pedido.estado == 'aceptado' || 
+                    pedido.estado == 'en camino' || 
+                    (pedido.estado == 'entregado' || pedido.estado == 'cancelado') && 
+                    new Date(pedido.fechaPedido).toDateString() === new Date().toDateString()
+                );
+                this.pedidosPasados = this.pedidos.filter(pedido => 
+                    (pedido.estado === 'cancelado' || pedido.estado === 'entregado') && 
+                    new Date(pedido.fechaPedido).toDateString() !== new Date().toDateString()
+                );
+            });
+        }
+    }
 }
 </script>
