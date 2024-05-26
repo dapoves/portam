@@ -19,8 +19,7 @@
                 <div class="absolute top-2/4 right-3 grid h-5 w-5 -translate-y-2/4">
                     <IconMapPin color="gray" />
                 </div>
-                <input
-                    v-model="direccion"
+                <input v-model="direccion"
                     class="peer h-full w-full rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 !pr-9 font-sans text-sm font-normal text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-[#434E58] focus:border-t-transparent focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                     placeholder=" " />
                 <label
@@ -30,9 +29,11 @@
             </div>
             <hr class="border-t-4 mt-6">
             <p class="mt-6 mb-3 font-semibold text-[#171725]">Opciones de Pago</p>
-            <div class="flex justify-between cursor-pointer z-1" @click="toggleTarjetas">
+            <div class="flex flex-wrap items-center justify-between cursor-pointer z-1" @click="toggleTarjetas">
                 <p class="mb-3 font-medium text-[#434E58]">Tarjeta</p>
-                <IconChevronRight stroke-width="2" class="mb-3 rotate" :class="{ 'rotate-90': mostrarTarjetas }" />
+                <select v-model="tarjeta_id" class="max-w-full text-gray-800 mb-3 rounded-lg border border-gray-300 p-2">
+                    <option v-for="tarjeta in tarjetas" :value="tarjeta.id">{{ tarjetaOption(tarjeta) }}</option>
+                </select>
             </div>
             <hr class="border-t-2">
             <div class="flex justify-between mt-3">
@@ -48,11 +49,9 @@
                 <p class="mb-3 font-bold text-[#434E58]">Pago Total</p>
                 <p class="font-bold text-[#9139BA]">{{ precioTotal }}€</p>
             </div>
-            <button
-                @click="pagar"
+            <button @click="pagar"
                 class="align-middle select-none bg-purple-600 font-noto-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-6 rounded-full bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full"
-                type="button"
-                data-ripple-light="true">
+                type="button" data-ripple-light="true">
                 Pagar 24€
             </button>
         </div>
@@ -63,6 +62,7 @@
 import { ref } from 'vue';
 import { useOrderStore } from '~/stores/order';
 import PedidoService from '~/services/PedidoService';
+import TarjetaService from '~/services/TarjetaService';
 
 const orderStore = useOrderStore();
 let mostrarTextarea = ref(false);
@@ -70,12 +70,19 @@ let mostrarTarjetas = ref(false);
 let indicacionesExtra = ref('');
 let direccion = ref('');
 let precioTotal = (orderStore.subtotal + orderStore.costeEnvio).toFixed(2);
+let tarjetas = ref([]);
+let tarjeta_id = ref('');
+
+
+onMounted(async () => {
+    await getTarjetas();
+});
 
 async function pagar() {
     let pedido = new FormData();
     pedido.append('cliente_id', localStorage.getItem('user_id'));
     pedido.append('establecimiento_id', orderStore.stablish.id);
-    pedido.append('tarjeta_id', 1);
+    pedido.append('tarjeta_id', tarjeta_id.value);
     pedido.append('precioTotal', precioTotal);
     pedido.append('direccion', direccion.value);
     pedido.append('indicaciones', indicacionesExtra.value);
@@ -91,6 +98,19 @@ async function pagar() {
         PedidoService.addProduto(pedidoProducto);
     });
     navigateTo('/');
+}
+
+
+async function getTarjetas() {
+    await TarjetaService.getMisTarjetas(localStorage.getItem('user_id')).then((response) => {
+        console.log(response.data);
+        tarjetas.value = response.data;
+        tarjeta_id.value = tarjetas.value.find(tarjeta => tarjeta.predeterminada).id;
+    });
+}
+
+function tarjetaOption(tarjeta) {
+    return `${tarjeta.tipo.charAt(0).toUpperCase() + tarjeta.tipo.slice(1)} ${tarjeta.numero.slice(-4)} - ${tarjeta.titular}${tarjeta.predeterminada ? ' (Predeterminada)' : ''}`;
 }
 
 function toggleTextarea() {
