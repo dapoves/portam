@@ -8,7 +8,7 @@
                     <div class="flex justify-between items-center">
                         <div>
                             <p class="block text-sm font-light">Número Tarjeta</p>
-                            <p class="text-lg font-semibold tracking-widest mt-1">{{ tarjeta.numero }}</p>
+                            <p class="text-xl font-semibold tracking-widest">{{ tarjeta.numero }}</p>
                         </div>
                         <img :src="`http://127.0.0.1:8000/storage/tarjetas/${tarjeta.tipo}.png`" alt="Card Logo"
                             class="h-10">

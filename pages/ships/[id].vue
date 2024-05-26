@@ -11,6 +11,10 @@
                 <p class="font-semibold text-[#9139BA]">{{ envio.precioTotal }}€</p>
             </div>
             <div class="flex justify-between">
+                <p class="mb-3 font-medium text-[#434E58]">Método de pago</p>
+                <p class="font-semibold text-[#434E58] text-right">{{ tarjetaString }}</p>
+            </div>
+            <div class="flex justify-between">
                 <p class="mb-3 font-medium text-[#434E58]">Dirección de recogida</p>
                 <p class="font-semibold text-[#434E58] text-right">{{ envio.direccionRecogida }}, {{
                     poblacionOrigen.nombre }}</p>
@@ -101,6 +105,7 @@
 import { useRoute } from 'vue-router';
 import EnvioService from '~/services/EnvioService';
 import EstablecimientoService from '~/services/EstablecimientoService';
+import TarjetaService from '~/services/TarjetaService';
 
 const route = useRoute();
 
@@ -112,12 +117,17 @@ let tiempo = ref('');
 let horaPedido = ref('');
 let horaAceptado = ref('');
 let horaEntregado = ref('');
+let tarjetaString = ref({});
 
 
 EnvioService.getEnvio(route.params.id).then((response) => {
     envio.value = response.data;
     let fecha = new Date(envio.value.fechaEntrega);
     fechaFormateada.value = fecha.toLocaleString('es-ES', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+    TarjetaService.getTarjeta(envio.value.tarjeta_id).then((response) => {
+        tarjetaString.value =  response.data.tipo.charAt(0).toUpperCase() + response.data.tipo.slice(1) + ' ' + response.data.numero.slice(-4);
+    });
 
     EstablecimientoService.getPoblacion(envio.value.origen_id).then((response) => {
         poblacionOrigen.value = response.data;
@@ -156,4 +166,5 @@ function setCuando(){
             break;
     }
 }
+
 </script>

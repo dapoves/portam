@@ -4,7 +4,7 @@
       <NuxtLink @click="$router.go(-1)" class="cursor-pointer">
         <IconChevronLeft stroke-width="3" color="white" :size="28" />
       </NuxtLink>
-      <p class="text-2xl mt-10 text-white">¡Hola {{ username }}!</p>
+      <p class="text-2xl mt-10 text-white font-semibold">¡Hola {{ username }}!</p>
       <NuxtLink @click="$router.go(-1)" class="opacity-0">
         <IconChevronLeft stroke-width="3" color="white" :size="28" />
       </NuxtLink>
@@ -14,11 +14,11 @@
         <IconCircleUserRound color="#9139BA" />
         <p class="pl-4">Cuenta</p>
       </NuxtLink>
-      <NuxtLink class="flex px-6 py-4  border-b border-gray-200">
+      <NuxtLink to="/myorders" class="flex px-6 py-4  border-b border-gray-200">
         <IconShoppingCart color="#9139BA" />
         <p class="pl-4">Pedidos</p>
       </NuxtLink>
-      <NuxtLink class="flex px-6 py-4  border-b border-gray-200">
+      <NuxtLink to="/myships" class="flex px-6 py-4  border-b border-gray-200">
         <IconTruck color="#9139BA" />
         <p class="pl-4">Envíos</p>
       </NuxtLink>

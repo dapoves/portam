@@ -23,31 +23,30 @@
             <textarea v-model="descripcion" class="w-full rounded-lg border border-gray-300 p-2 mt-2" rows="2"
                 placeholder="¿Qué quieres enviar?"></textarea>
             <p class="font-semibold pt-5 pb-1">Dirección de Recogida</p>
-            
+
             <div class="flex">
-                <select v-model="poblacionOrigen"
-                    class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
+                <select v-model="poblacionOrigen" class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
                     <option v-for="poblacion in poblaciones" :value="poblacion.id">{{ poblacion.nombre }}</option>
                 </select>
-                <input v-model="direccionRecogida" type="text" class="ml-2 w-full rounded-lg border border-gray-300 p-2 mt-2"
+                <input v-model="direccionRecogida" type="text"
+                    class="ml-2 w-full rounded-lg border border-gray-300 p-2 mt-2"
                     placeholder="¿Dónde quieres que recogamos tu pedido?">
             </div>
 
             <p class="font-semibold pt-6 pb-1">Dirección de Entrega</p>
             <div class="flex">
-                <select v-model="poblacionDestino"
-                    class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
+                <select v-model="poblacionDestino" class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
                     <option v-for="poblacion in poblaciones" :value="poblacion.id">{{ poblacion.nombre }}</option>
                 </select>
-                <input v-model="direccionEntrega" type="text" class="ml-2 w-full rounded-lg border border-gray-300 p-2 mt-2"
+                <input v-model="direccionEntrega" type="text"
+                    class="ml-2 w-full rounded-lg border border-gray-300 p-2 mt-2"
                     placeholder="¿Dónde quieres que llevemos tu paquete?">
             </div>
-        
+
             <div class="pt-6 flex">
                 <div class="mr-8     ">
                     <p class="font-semibold pb-1">Estimación de peso</p>
-                    <select v-model="estimacionPeso"
-                        class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
+                    <select v-model="estimacionPeso" class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
                         <option value="1">0-2kg</option>
                         <option value="2">2-5kg</option>
                         <option value="5">5-10kg</option>
@@ -56,8 +55,7 @@
                 </div>
                 <div class="ml-8">
                     <p class="font-semibold pb-1">Tiempo de espera </p>
-                    <select v-model="tiempoEspera"
-                        class="text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
+                    <select v-model="tiempoEspera" class="text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
                         <option value="antes posible">Lo antes posible</option>
                         <option selected value="hoy">Para Hoy</option>
                         <option value="manyana">Para Mañana</option>
@@ -69,6 +67,12 @@
             <p class="font-semibold pt-6 pb-1">Instrucciones adicionales:</p>
             <textarea v-model="instrucciones" class="w-full rounded-lg border border-gray-300 p-2 mt-2" rows="4"
                 placeholder="¿Alguna indicación adicional para el repartidor?"></textarea>
+            <p class="font-semibold pt-4 pb-1">Método de pago</p>
+            <select v-model="tarjeta_id" class="max-w-full text-gray-800 rounded-lg border border-gray-300 p-2 mt-2 mb-12">
+                <option v-for="tarjeta in tarjetas" :value="tarjeta.id">{{ tarjetaOption(tarjeta) }}</option>
+
+            </select>
+
             <button
                 v-if="tipoEnvio && descripcion && direccionRecogida && poblacionDestino && poblacionOrigen && direccionEntrega && estimacionPeso && tiempoEspera"
                 class="align-middle mt-6 select-none bg-purple-600 font-noto-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-6 rounded-full bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full"
@@ -84,6 +88,7 @@
 <script>
 import EstablecimientoService from '~/services/EstablecimientoService';
 import EnvioService from '~/services/EnvioService';
+import TarjetaService from '~/services/TarjetaService';
 
 export default {
     data() {
@@ -98,7 +103,12 @@ export default {
             poblacionOrigen: '',
             poblacionDestino: '',
             poblaciones: [],
+            tarjetas: [],
+            tarjeta_id: '',
         };
+    },
+    created() {
+
     },
     computed: {
         //esto deberia ser mediante API
@@ -123,6 +133,11 @@ export default {
             }
 
             return precio;
+        },
+        tarjetaOption() {
+            return (tarjeta) => {
+                return `${tarjeta.tipo.charAt(0).toUpperCase() + tarjeta.tipo.slice(1)} ${tarjeta.numero.slice(-4)} - ${tarjeta.titular}${tarjeta.predeterminada ? ' (Predeterminada)' : ''}`;
+            }
         }
     },
     methods: {
@@ -140,7 +155,7 @@ export default {
             envio.append('destino_id', vm.poblacionDestino);
             envio.append('origen_id', vm.poblacionOrigen);
             envio.append('cliente_id', localStorage.getItem('user_id'));
-            envio.append('tarjeta_id', 1);
+            envio.append('tarjeta_id', vm.tarjeta_id);
             envio.append('peso', vm.estimacionPeso);
             envio.append('espera', vm.tiempoEspera);
             console.log(vm.tiempoEspera);
@@ -149,7 +164,7 @@ export default {
 
             EnvioService.createEnvio(envio).then((response) => {
                 console.log(response);
-                if (response.data.status === 'ok'){
+                if (response.data.status === 'ok') {
                     this.$swal({
                         title: 'Envío solicitado con éxito',
                         text: 'Espere hasta que un repartidor acepte la solicitud',
@@ -157,7 +172,7 @@ export default {
                         showConfirmButton: false,
                         timer: 1500
                     });
-                    navigateTo('/myShips');  
+                    navigateTo('/myShips');
                 } else {
                     this.$swal({
                         title: 'Error',
@@ -171,11 +186,15 @@ export default {
                 console.log(error.response.data.message);
             });
 
-        } 
+        }
     },
     async mounted() {
         const response = await EstablecimientoService.getPoblaciones();
         this.poblaciones = response.data;
+
+        const tarjetas = await TarjetaService.getMisTarjetas(localStorage.getItem('user_id'));
+        this.tarjetas = tarjetas.data;
+        this.tarjeta_id = this.tarjetas.find(tarjeta => tarjeta.predeterminada).id;
     }
 }
 
