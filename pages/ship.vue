@@ -6,17 +6,17 @@
             <div class="my-6 flex" style="justify-content: space-around;">
                 <div class="text-center cursor-pointer transition-all" @click="setTipoEnvio('pesado')"
                     :class="{ 'scale-110': tipoEnvio === 'pesado', 'opacity-50': tipoEnvio !== 'pesado' }">
-                    <div class="bg-purple-700 rounded-full w-fit p-4 items-center shadow-lg">
+                    <div class="bg-primary rounded-full w-fit p-4 items-center shadow-lg">
                         <IconTruck color="white" stroke-width="2" :size="60" />
                     </div>
-                    <p class="mt-3 text-[#9139BA] font-semibold">Pesado</p>
+                    <p class="mt-3 text-primary font-semibold">Pesado</p>
                 </div>
                 <div class="text-center cursor-pointer transition-all" @click="setTipoEnvio('ligero')"
                     :class="{ 'scale-110': tipoEnvio === 'ligero', 'opacity-50': tipoEnvio !== 'ligero' }">
-                    <div class="bg-purple-700 rounded-full w-fit p-4 items-center shadow-lg">
+                    <div class="bg-primary rounded-full w-fit p-4 items-center shadow-lg">
                         <IconBike color="white" stroke-width="2" :size="60" />
                     </div>
-                    <p class="mt-3 text-[#9139BA] font-semibold">Ligero</p>
+                    <p class="mt-3 text-primary font-semibold">Ligero</p>
                 </div>
             </div>
             <p class="font-semibold pt-6 pb-1">Descripción del paquete:</p>

@@ -36,7 +36,7 @@
                     <div class="bg-white p-4 rounded-lg">
                         <p class="mb-4 text-center">¿Añadir {{ product.nombre }} al pedido?</p>
                         <button
-                            class="block w-full select-none rounded-lg bg-purple-700 py-3 px-6 text-center align-middle text-xs font-bold uppercase text-white transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                            class="block w-full select-none rounded-lg bg-primary py-3 px-6 text-center align-middle text-xs font-bold uppercase text-white transition-all hover:scale-105 focus:scale-105 focus:opacity-[0.85] active:scale-100 active:opacity-[0.85] disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                             type="button" @click=addProduct(product)>
                             AÑADIR {{ product.precio }}€
                         </button>
@@ -45,7 +45,7 @@
             </div>
         </div>
         <div v-if="order.length > 0" @click="checkout"
-            class="w-2/3 flex justify-between items-center mx-auto bg-purple-700 rounded-3xl text-white fixed bottom-0 p-1 inset-x-0 m-8 transform transition-all hover:scale-105 cursor-pointer">
+            class="w-2/3 flex justify-between items-center mx-auto bg-primary rounded-3xl text-white fixed bottom-0 p-1 inset-x-0 m-8 transform transition-all hover:scale-105 cursor-pointer">
             <div
                 class="bg-white rounded-full h-10 w-10 text-base font-bold text-black flex items-center justify-center">
                 <p>x{{ order.length }}</p>

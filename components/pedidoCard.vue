@@ -3,9 +3,13 @@
         <div v-if="!isPasado" class="mb-6 w-4/5 mx-auto">
             <NuxtLink :to="`orders/${props.pedido.id}`">
                 <div class="flex items-center">
-                <IconCircleCheck v-if="props.pedido.estado != 'cancelado'" color="white" fill="#15803d" :size="18" />
+                <IconCircleCheck v-if="props.pedido.estado != 'cancelado'" color="white" :fill="props.pedido.estado === 'en camino' ? '#FFA500' : '#15803d'" :size="18" />
                 <IconCircleX v-else color="red" :size="18" />
-                <p class="text-sm ml-1 mr-2" :class="props.pedido.estado !== 'cancelado' ? 'text-green-700' : 'text-red-600'">{{ props.pedido.estado }}</p>
+                <p class="text-sm ml-1 mr-2" :class="{
+                    'text-green-700': props.pedido.estado !== 'cancelado',
+                    'text-red-600': props.pedido.estado === 'cancelado',
+                    'text-orange-500': props.pedido.estado === 'en camino'
+                }">{{ props.pedido.estado }}</p>
                 <p class="text-sm text-gray-500"> {{ fechaFormateada }}</p>
             </div>
             <p class="my-1">{{ stablish.nombre }}</p>

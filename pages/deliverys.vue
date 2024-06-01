@@ -1,29 +1,29 @@
 <template>
     <div>
-        <GeneralHeader>Envíos</GeneralHeader>
+        <GeneralHeader>Área de Repartidores</GeneralHeader>
         <div class="flex justify-center py-4">
             <div class="flex justify-center my-4 bg-slate-200 rounded-xl w-fit"
                 :class="{ 'h-auto': activeTab === 'active' }">
                 <button :class="{ 'bg-tertiary text-white': activeTab === 'active' }"
                     class="py-2 px-12 focus:outline-none rounded-xl font-semibold" @click="activeTab = 'active'">
-                    Activos
+                    Pedidos
                 </button>
                 <button :class="{ 'bg-tertiary text-white': activeTab === 'past' }"
                     class="py-2 px-12 focus:outline-none rounded-xl font-semibold" @click="activeTab = 'past'">
-                    Pasados
+                    Envios
                 </button>
             </div>
         </div>
         <div v-if="activeTab === 'active'">
-            <ShipCard v-for="envio in enviosActivos" :key="envio.id" :envio="envio" />
+            <OrderRequest v-for="pedido in pedidos" :key="pedido.id" :pedido="pedido" />
         </div>
         <div v-if="activeTab === 'past'">
-            <ShipCard v-for="envio in enviosPasados" :key="envio.id" :envio="envio" />
+            {{ envios }}
         </div>
     </div>
 </template>
-
 <script>
+import PedidoService from '~/services/PedidoService';
 import EnvioService from '~/services/EnvioService';
 
 export default {
@@ -31,21 +31,21 @@ export default {
         return {
             userId: null,
             activeTab: 'active',
+            pedidos: [],
             envios: [],
-            enviosActivos: [],
-            enviosPasados: [],
         };
     },
     mounted() {
         this.userId = localStorage.getItem('user_id');
         if (this.userId) {
-            EnvioService.getMisEnvios(this.userId).then((response) => {
-                this.envios = response.data;
-
-                this.enviosActivos = this.envios.filter(envio => !envio.fechaEntrega && envio.estado !== 'cancelado');
-                this.enviosPasados = this.envios.filter(envio => envio.fechaEntrega || envio.estado === 'cancelado');
+            PedidoService.getPedidos().then((response) => {
+                this.pedidos = response.data.filter(pedido => pedido.estado === 'aceptado');
+            });
+            EnvioService.getEnvios().then((response) => {
+                this.envios = response.data.filter(envio => envio.estado === 'pendiente');
             });
         }
+        
     }
 }
 </script>

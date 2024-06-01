@@ -4,14 +4,14 @@
     <div class="flex justify-center py-4">
         <div class="flex justify-center my-4 bg-slate-200 rounded-xl w-fit" :class="{ 'h-auto': activeTab === 'active' }">
         <button 
-          :class="{ 'bg-purple-950 text-white': activeTab === 'active' }"
+          :class="{ 'bg-tertiary text-white': activeTab === 'active' }"
           class="py-2 px-12 focus:outline-none rounded-xl font-semibold"
           @click="activeTab = 'active'"
         >
           Activos
         </button>
         <button 
-          :class="{ 'bg-purple-950 text-white': activeTab === 'past' }"
+          :class="{ 'bg-tertiary text-white': activeTab === 'past' }"
           class="py-2 px-12 focus:outline-none rounded-xl font-semibold"
           @click="activeTab = 'past'"
         >

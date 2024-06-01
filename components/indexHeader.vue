@@ -8,7 +8,9 @@
                 <h1 class="ml-2 mr-2 mb-1 text-neutral-600">Les valls </h1>
                 <IconChevronRight color="gray" stroke-width="2"/>
             </div>
-            <IconBike :size="30"/>
+            <NuxtLink to="/deliverys">
+                <IconBike :size="30"/>
+            </NuxtLink>
         </header>
         </div>
 </template>

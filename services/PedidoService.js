@@ -16,6 +16,9 @@ export default {
     addProduto(pedidoProducto) {
         return apiClient.post(`/pedido/productos`, pedidoProducto)
     },
+    getPedidos() {
+        return apiClient.get('/pedidos')
+    },
     getMisPedidos(id) {
         return apiClient.get('/pedidos/mis-pedidos/' + id)
     },
@@ -24,5 +27,8 @@ export default {
     },
     getProductosPedido(id) {
         return apiClient.get('/pedido/' + id + '/productos')
+    },
+    repartirPedido(data) {
+        return apiClient.post('/pedidos/repartir', data)
     }
 }

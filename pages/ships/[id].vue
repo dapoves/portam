@@ -8,7 +8,7 @@
         <div class="w-4/5 mx-auto">
             <div class="flex justify-between">
                 <p class="mb-3 font-medium text-[#434E58]">Precio Total</p>
-                <p class="font-semibold text-[#9139BA]">{{ envio.precioTotal }}€</p>
+                <p class="font-semibold text-primary">{{ envio.precioTotal }}€</p>
             </div>
             <div class="flex justify-between">
                 <p class="mb-3 font-medium text-[#434E58]">Método de pago</p>

@@ -28,7 +28,7 @@
             <input id="telefono" type="text" placeholder="633 444 555"
                 class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-slate-100 placeholder:text-grey-700 bg-slate-100 text-dark-grey-900 rounded-2xl" />
 
-            <button class="w-full px-6 py-4 mx-auto mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-800 focus:ring-4 focus:bg-purple-900 bg-purple-700">
+            <button class="w-full px-6 py-4 mx-auto mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-800 focus:ring-4 focus:bg-purple-900 bg-primary">
                 Registrarse</button>
             <p class="text-sm leading-relaxed text-grey-900">Ya tienes una cuenta? <NuxtLink to="login" class="font-bold text-purple-800">Inicia Sesión</NuxtLink></p>
         </form>
@@ -50,9 +50,12 @@ export default {
             LoginService.register(data)
                 .then(response => {
                     if (response.data.status == 'ok') {
+                        localStorage.setItem('token', response.data.access_token);
+                        localStorage.setItem('user_id', response.data.user.id);
+                        localStorage.setItem('user_name', response.data.user.nombre);
+                        localStorage.setItem('user_role', response.data.user.rol);
                         this.$swal({
-                            title: 'Bienvenid@' + response.data.user.nombre,
-                            text: response.data.message,
+                            title: 'Bienvenid@ ' + response.data.user.nombre,
                             icon: 'success',
                             showConfirmButton: false,
                             timer: 1500,

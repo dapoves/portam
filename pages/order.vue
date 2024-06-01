@@ -2,7 +2,7 @@
     <div>
         <GeneralHeader>Pedido</GeneralHeader>
         <OrderProduct v-for="product in orderStore.products" :key="product.id" :product="product" />
-        <div class="p-4">
+        <div class="p-6">
             <p class="my-2 font-semibold text-[#171725]">Opciones de envío</p>
             <p class="my-3 font-semibold text-[#434E58]">{{ orderStore.stablish.nombre }}</p>
             <hr class="border-t-2">
@@ -47,7 +47,7 @@
             <hr class="border-t-2">
             <div class="flex justify-between my-3">
                 <p class="mb-3 font-bold text-[#434E58]">Pago Total</p>
-                <p class="font-bold text-[#9139BA]">{{ precioTotal }}€</p>
+                <p class="font-bold text-primary">{{ precioTotal }}€</p>
             </div>
             <button @click="pagar"
                 class="align-middle select-none bg-purple-600 font-noto-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-6 rounded-full bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full"
@@ -63,6 +63,7 @@ import { ref } from 'vue';
 import { useOrderStore } from '~/stores/order';
 import PedidoService from '~/services/PedidoService';
 import TarjetaService from '~/services/TarjetaService';
+import Swal from 'sweetalert2';
 
 const orderStore = useOrderStore();
 let mostrarTextarea = ref(false);
@@ -79,6 +80,7 @@ onMounted(async () => {
 });
 
 async function pagar() {
+
     let pedido = new FormData();
     pedido.append('cliente_id', localStorage.getItem('user_id'));
     pedido.append('establecimiento_id', orderStore.stablish.id);
@@ -97,13 +99,21 @@ async function pagar() {
         pedidoProducto.append('producto_id', product.id);
         PedidoService.addProduto(pedidoProducto);
     });
-    navigateTo('/');
+
+    Swal.fire({
+        title: 'Pedido realizado',
+        text: 'Tu pedido ha sido realizado con éxito y esta pendiente de ser aceptado por parte del establecimiento',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 2500
+    });
+
+    navigateTo('/myOrders');
 }
 
 
 async function getTarjetas() {
     await TarjetaService.getMisTarjetas(localStorage.getItem('user_id')).then((response) => {
-        console.log(response.data);
         tarjetas.value = response.data;
         tarjeta_id.value = tarjetas.value.find(tarjeta => tarjeta.predeterminada).id;
     });

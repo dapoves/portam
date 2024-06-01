@@ -3,6 +3,11 @@
         <GeneralHeader>Pedidos</GeneralHeader>
         <img :src="imagenUrl(stablish)" alt="imagen establecimiento" class="w-full h-44 object-cover" />
         <div class="text-center my-6">
+           <div v-if="pedido.estado === 'cancelado'" class="mb-6">
+              <IconCircleX color="red" class="mx-auto mt-2" size="40" />
+              <p class="text-2xl text-red-500 font-semibold mt-2">Pedido Cancelado</p>
+              <p class="text-lg text-red-500">El pedido fue cancelado por el {{ motivoCancelacion }}</p>
+            </div>
             <p class="text-3xl font-semibold">{{ stablish.nombre }}</p>
             <p class="mt-2">{{ fechaFormateada }}</p>
         </div>
@@ -28,7 +33,7 @@
             <hr class="border-t-2">
             <div class="flex justify-between my-3">
                 <p class="mb-3 font-bold text-[#434E58]">Pago Total</p>
-                <p class="font-bold text-[#9139BA]">{{ pedido.precioTotal }}€</p>
+                <p class="font-bold text-primary">{{ pedido.precioTotal }}€</p>
             </div>
         </div>
     </div>
@@ -45,6 +50,7 @@ let stablish = ref({});
 let products = ref([]);
 let subtotal = ref(0);
 let fechaFormateada = ref('');
+let motivoCancelacion = ref('establecimiento');
 
 PedidoService.getPedido(route.params.id).then((response) => {
   pedido.value = response.data;
@@ -62,7 +68,17 @@ PedidoService.getPedido(route.params.id).then((response) => {
       subtotal.value += product.precio;
     });
   });
+
+  if (pedido.value.estado === 'cancelado' && pedido.value.repartidor_id !== null) {
+    motivoCancelacion.value = 'repartidor'
+  }
+
+  // if (pedido.value.estado === 'cancelado' && pedido.value.establecimiento_id === null) {
+  //   motivoCancelacion.value = 'ti'
+  // }
 });
+
+
 
 function imagenUrl(stablish) {
   return stablishUrl + stablish.imagen;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex justify-between p-9 px-6 w-full h-full absolute top-0 bg-purple-700 z-10">
+    <div class="flex justify-between p-9 px-6 w-full h-full absolute top-0 bg-primary z-10">
       <NuxtLink @click="$router.go(-1)" class="cursor-pointer">
         <IconChevronLeft stroke-width="3" color="white" :size="28" />
       </NuxtLink>
@@ -10,7 +10,7 @@
       </NuxtLink>
     </div>
     <div class="bg-white h-full w-full mt-32 absolute z-20 rounded-t-3xl ">
-      <NuxtLink to="/account"class="flex px-6 py-4  border-b border-gray-200">
+      <NuxtLink to="/account" class="flex px-6 py-4  border-b border-gray-200">
         <IconCircleUserRound color="#9139BA" />
         <p class="pl-4">Cuenta</p>
       </NuxtLink>
@@ -33,25 +33,44 @@
       <div class="px-6 py-2 bg-purple-300 border-b border-gray-200">
         <p class="font-semibold">Zona de repartidor</p>
       </div>
-      <NuxtLink class="flex items-center px-6 py-4  border-b border-gray-200">
+      <NuxtLink v-if="!isRepartidor" class="flex items-center px-6 py-4  border-b border-gray-200">
         <IconClipboardPenLine color="#9139BA" />
         <p class="pl-4">Solicitud de verificación como repartidor</p>
       </NuxtLink>
+      <NuxtLink v-if="isRepartidor" to="/currentDelivery" class="flex px-6 py-4  border-b border-gray-200">
+        <IconRadar color="#9139BA" />
+        <p class="pl-4">Entrega en Curso</p>
+      </NuxtLink>
+      <div @click="logout" class="flex cursor-pointer items-center px-6 py-4  border-b border-gray-200">
+        <IconLogOut color="#9139BA" />
+        <p class="pl-4">Cerrar Sesión</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { isRepartidor } from '~/funciones/authorization.js';
+
 
 export default {
   data() {
     return {
     };
   },
+  methods: {
+    logout() {
+      localStorage.clear();
+      this.$router.push('/login');
+    }
+  },
   computed: {
     username() {
       return localStorage.getItem('user_name');
-    }
+    },
+    isRepartidor() {
+      return isRepartidor();
+    },
   },
 }
 </script>

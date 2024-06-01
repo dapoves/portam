@@ -37,7 +37,7 @@
             <span class="ml-3 text-sm font-normal text-grey-900">Mantener la sesión iniciada?</span>
           </label>
         </div>
-        <button class="w-full px-6 py-4 mx-auto mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-800 focus:ring-4 focus:bg-purple-900 bg-purple-700">Iniciar</button>
+        <button class="w-full px-6 py-4 mx-auto mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-800 focus:ring-4 focus:bg-purple-900 bg-primary">Iniciar</button>
   
         <p class="text-sm leading-relaxed text-grey-900">No tienes cuenta? <NuxtLink to="register"
             class="font-bold text-purple-800">Registrate</NuxtLink></p>
@@ -60,6 +60,7 @@
               localStorage.setItem('token', response.data.access_token);
               localStorage.setItem('user_id', response.data.user.id);
               localStorage.setItem('user_name', response.data.user.nombre);
+              localStorage.setItem('user_role', response.data.user.rol);
               this.$swal({
                 title: 'Hola de nuevo, ' + response.data.user.nombre,
                 text: response.data.message,
