@@ -28,7 +28,4 @@ export default {
     getProductosPedido(id) {
         return apiClient.get('/pedido/' + id + '/productos')
     },
-    repartirPedido(data) {
-        return apiClient.post('/pedidos/repartir', data)
-    }
 }

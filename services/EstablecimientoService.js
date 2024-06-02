@@ -28,5 +28,23 @@ export default {
     getPoblacion(id) {
       return apiClient.get('/poblaciones/' + id)
     },
+    getPedidos(id) {
+        return apiClient.get('/establecimientos/' + id + '/pedidos')
+    },
+    getPedidosPendientes(id) {
+        return apiClient.get('/establecimientos/' + id + '/pedidos/pendientes')
+    },
+    aceptarPedido(id) {
+        return apiClient.post('/pedidos/aceptar/' + id)
+    },
+    rechazarPedido(id) {
+        return apiClient.post('/pedidos/rechazar/' + id)
+    },
+    getPedidosAceptados(id) {
+        return apiClient.get('/establecimientos/' + id + '/pedidos/aceptados')
+    },
+    setOnTheWay(id) {
+        return apiClient.post('/pedidos/on-the-way/' + id)
+    }
 }
     

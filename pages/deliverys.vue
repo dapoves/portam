@@ -1,30 +1,11 @@
 <template>
     <div>
-        <GeneralHeader>Área de Repartidores</GeneralHeader>
-        <div class="flex justify-center py-4">
-            <div class="flex justify-center my-4 bg-slate-200 rounded-xl w-fit"
-                :class="{ 'h-auto': activeTab === 'active' }">
-                <button :class="{ 'bg-tertiary text-white': activeTab === 'active' }"
-                    class="py-2 px-12 focus:outline-none rounded-xl font-semibold" @click="activeTab = 'active'">
-                    Pedidos
-                </button>
-                <button :class="{ 'bg-tertiary text-white': activeTab === 'past' }"
-                    class="py-2 px-12 focus:outline-none rounded-xl font-semibold" @click="activeTab = 'past'">
-                    Envios
-                </button>
-            </div>
-        </div>
-        <div v-if="activeTab === 'active'">
-            <OrderRequest v-for="pedido in pedidos" :key="pedido.id" :pedido="pedido" />
-        </div>
-        <div v-if="activeTab === 'past'">
-            {{ envios }}
-        </div>
+       <DeliversZone v-if="isRepartidor" />
+       <PartnersZone v-if="isSocio" />
     </div>
 </template>
 <script>
-import PedidoService from '~/services/PedidoService';
-import EnvioService from '~/services/EnvioService';
+import { isRepartidor, isSocio } from '~/funciones/authorization.js';
 
 export default {
     data() {
@@ -35,17 +16,13 @@ export default {
             envios: [],
         };
     },
-    mounted() {
-        this.userId = localStorage.getItem('user_id');
-        if (this.userId) {
-            PedidoService.getPedidos().then((response) => {
-                this.pedidos = response.data.filter(pedido => pedido.estado === 'aceptado');
-            });
-            EnvioService.getEnvios().then((response) => {
-                this.envios = response.data.filter(envio => envio.estado === 'pendiente');
-            });
+    computed: {
+        isRepartidor() {
+            return isRepartidor();
+        },
+        isSocio() {
+            return isSocio();
         }
-        
     }
 }
 </script>

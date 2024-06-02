@@ -15,6 +15,7 @@
                         <p class="my-2"><strong class="text-[#434E58]">Tiempo transcurrido: </strong> {{
                             tiempoTranscurrido
                             }}</p>
+                        <p class="my-2"><strong class="text-[#434E58]">Tiempo estimado de preparación:</strong> {{ establecimiento.tiempoPreparacion }} min</p>
                     </div>
                     <div v-for="producto in productos" class="flex items-start space-x-4 pt-4 bg-white">
                         <img :src="imagenUrl(producto)" :alt="producto.nombre"

@@ -40,6 +40,7 @@
 import dayjs from 'dayjs';
 import PedidoService from '~/services/PedidoService';
 import EstablecimientoService from '~/services/EstablecimientoService';
+import RepartidorService from '~/services/RepartidorService';
 
 export default {
     props: {
@@ -85,7 +86,7 @@ export default {
                    let data = new FormData();
                    data.append('pedido_id', this.pedido.id);
                    data.append('repartidor_id', localStorage.getItem('user_id')); 
-                   PedidoService.repartirPedido(data).then((response) => {
+                   RepartidorService.repartirPedido(data).then((response) => {
                         this.$swal({
                             title: response.data.message,
                             text: `Dirígete a ${this.establecimiento.nombre}, ${this.establecimiento.direccion} para recoger el pedido.`,

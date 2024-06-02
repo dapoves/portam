@@ -6,7 +6,8 @@
            <div v-if="pedido.estado === 'cancelado'" class="mb-6">
               <IconCircleX color="red" class="mx-auto mt-2" size="40" />
               <p class="text-2xl text-red-500 font-semibold mt-2">Pedido Cancelado</p>
-              <p class="text-lg text-red-500">El pedido fue cancelado por el {{ motivoCancelacion }}</p>
+              <!-- motivo de cancelacion -->
+              <p class="text-lg text-red-500">El pedido fue cancelado</p>
             </div>
             <p class="text-3xl font-semibold">{{ stablish.nombre }}</p>
             <p class="mt-2">{{ fechaFormateada }}</p>

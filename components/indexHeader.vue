@@ -4,14 +4,29 @@
             <NuxtLink to="/menu">
                 <IconAlignJustify :size="30"/>
             </NuxtLink>
-            <div style="width: 70%;" class="flex items-center">
-                <h1 class="ml-2 mr-2 mb-1 text-neutral-600">Les valls </h1>
+            <div class="flex items-center px-6 w-full">
+                <h1 class="text-neutral-600 mb-1">Les valls </h1>
                 <IconChevronRight color="gray" stroke-width="2"/>
             </div>
-            <NuxtLink to="/deliverys">
+            <NuxtLink v-if="!isSocio" to="/deliverys">
                 <IconBike :size="30"/>
+            </NuxtLink>
+            <NuxtLink v-if="isSocio" to="/deliverys">
+                <IconScrollText :size="30"/>
             </NuxtLink>
         </header>
         </div>
 </template>
+
+<script>
+import { isSocio } from '~/funciones/authorization.js';
+
+export default {
+   computed: {
+       isSocio() {
+           return isSocio();
+       }
+   }
+}
+</script>
 
