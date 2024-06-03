@@ -33,5 +33,8 @@ export default {
     },
     entregarEnvio(id) {
         return apiClient.post('/envios/entregar/' + id)
-    }
+    },
+    cancelarEnvio(id) {
+        return apiClient.post('/envios/cancelar-entrega/' + id)
+    },
 }

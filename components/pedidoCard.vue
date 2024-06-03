@@ -82,7 +82,7 @@ switch (props.pedido.estado) {
         info.value = 'Tu pedido ha sido aceptado y está en proceso de preparación';
         break;
     case 'en camino':
-        info.value = 'Tu pedido ha sido aceptado por un repartidor y está en camino';
+        info.value = 'Tu pedido ha sido recogido por un repartidor y está en camino';
         break;
     case 'entregado':
         info.value = 'Tu pedido ha sido entregado';

@@ -47,10 +47,10 @@
                 <div class="mr-8     ">
                     <p class="font-semibold pb-1">Estimación de peso</p>
                     <select v-model="estimacionPeso" class=" text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
-                        <option value="1">0-2kg</option>
-                        <option value="2">2-5kg</option>
-                        <option value="5">5-10kg</option>
-                        <option value="10">+ 10kg</option>
+                        <option value="0-2kg">0-2kg</option>
+                        <option value="2-5kg">2-5kg</option>
+                        <option value="5-10kg">5-10kg</option>
+                        <option value="+10Kg">+ 10kg</option>
                     </select>
                 </div>
                 <div class="ml-8">
@@ -68,13 +68,15 @@
             <textarea v-model="instrucciones" class="w-full rounded-lg border border-gray-300 p-2 mt-2" rows="4"
                 placeholder="¿Alguna indicación adicional para el repartidor?"></textarea>
             <p class="font-semibold pt-4 pb-1">Método de pago</p>
-            <select v-model="tarjeta_id" class="max-w-full text-gray-800 rounded-lg border border-gray-300 p-2 mt-2 mb-12">
+            <select v-if="tarjetas.length > 0" v-model="tarjeta_id" class="max-w-full text-gray-800 rounded-lg border border-gray-300 p-2 mt-2">
                 <option v-for="tarjeta in tarjetas" :value="tarjeta.id">{{ tarjetaOption(tarjeta) }}</option>
 
             </select>
+            <p class="text-primary text-sm font-semibold underline cursor-pointer mt-1 mb-12" @click="navigateTo('/paymentMethods')">Añadir método de pago</p>
+            
 
             <button
-                v-if="tipoEnvio && descripcion && direccionRecogida && poblacionDestino && poblacionOrigen && direccionEntrega && estimacionPeso && tiempoEspera"
+                v-if="tipoEnvio && descripcion && direccionRecogida && poblacionDestino && poblacionOrigen && direccionEntrega && estimacionPeso && tiempoEspera && tarjeta_id"
                 class="align-middle mt-6 select-none bg-purple-600 font-noto-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-4 px-6 rounded-full bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none block w-full"
                 type="button" data-ripple-light="true" @click="checkout">
                 Pagar {{ precioTotal }}€
@@ -114,10 +116,10 @@ export default {
         //esto deberia ser mediante API
         precioTotal() {
             const preciosPeso = {
-                '1': 1.50,
-                '2': 3.50,
-                '5': 6.50,
-                '10': 10.50
+                '0-2kg': 1.50,
+                '2-5kg': 3.50,
+                '5-10kg': 6.50,
+                '+10Kg': 10.50
             };
             const preciosTiempo = {
                 'antes posible': 4,

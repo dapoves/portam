@@ -30,13 +30,10 @@
         <IconThumbsUp color="#9139BA" />
         <p class="pl-4">Favoritos</p>
       </NuxtLink>
-      <div class="px-6 py-2 bg-purple-300 border-b border-gray-200">
-        <p class="font-semibold">Zona de repartidor</p>
+      <div class="px-6 py-2 bg-purple-300 border-b border-gray-200 cursor-pointer" @click="toDeliverys">
+        <p v-if="isSocio" class="font-semibold">Área de pedidos</p>
+        <p v-else class="font-semibold">Área de repartidor</p>
       </div>
-      <NuxtLink v-if="!isRepartidor" class="flex items-center px-6 py-4  border-b border-gray-200">
-        <IconClipboardPenLine color="#9139BA" />
-        <p class="pl-4">Solicitud de verificación como repartidor</p>
-      </NuxtLink>
       <NuxtLink v-if="isRepartidor" to="/currentDelivery" class="flex px-6 py-4  border-b border-gray-200">
         <IconRadar color="#9139BA" />
         <p class="pl-4">Entrega en Curso</p>
@@ -50,7 +47,7 @@
 </template>
 
 <script>
-import { isRepartidor } from '~/funciones/authorization.js';
+import { isRepartidor, isSocio } from '~/funciones/authorization.js';
 
 
 export default {
@@ -62,7 +59,19 @@ export default {
     logout() {
       localStorage.clear();
       this.$router.push('/login');
-    }
+    },
+    toDeliverys() {
+       if (localStorage.getItem('user_role') === 'repartidor' || localStorage.getItem('user_role') === 'socio'){
+           navigateTo('/deliverys');
+       } else {
+         this.$swal({
+             title: 'Lo sentimos, no eres repartidor',
+             text: 'No puedes acceder a esta sección',
+             imageUrl: 'http://127.0.0.1:8000/storage/emojis/crying.png',
+             imageAlt: 'Error Image'
+         });
+       }
+  }
   },
   computed: {
     username() {
@@ -70,6 +79,9 @@ export default {
     },
     isRepartidor() {
       return isRepartidor();
+    },
+    isSocio() {
+      return isSocio();
     },
   },
 }

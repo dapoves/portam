@@ -66,7 +66,6 @@
                         <h4 class="font-bold text-purple-500">Recogido</h4>
                         <p class="mt-2 max-w-screen-sm text-sm text-gray-500">Pepito ha recogido el paquete y está de
                             camino a {{ poblacionDestino.nombre }}, {{ envio.direccionEntrega }}</p>
-                        <span class="mt-1 block text-sm font-semibold text-purple-500">{{ horaAceptado }}</span>
                     </div>
                 </div>
                 <div v-if="envio.fechaEntrega" class="relative w-full">

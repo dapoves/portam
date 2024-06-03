@@ -21,9 +21,11 @@
     </div>
     <div v-if="activeTab === 'active'">
         <PedidoCard v-for="pedido in pedidosActivos" :key="pedido.id" :pedido="pedido" />
+        <NotFound v-if="!pedidosActivos.length">No has hecho nignún pedido, ¡Que agarrao!</NotFound>
       </div>
       <div v-if="activeTab === 'past'">
         <PedidoCard v-for="pedido in pedidosPasados" :key="pedido.id" :pedido="pedido" />
+        <NotFound v-if="!pedidosPasados.length">¡Aún no has hecho ningún pedido!</NotFound>
       </div>
   </div>
 </template>

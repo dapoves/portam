@@ -16,9 +16,11 @@
         </div>
         <div v-if="activeTab === 'active'">
             <OrderRequest v-for="pedido in pedidos" :key="pedido.id" :pedido="pedido" />
+            <NotFound v-if="!pedidos.length">Ahora mismo no hay ningún pedido para repartir</NotFound>
         </div>
         <div v-if="activeTab === 'past'">
             <DeliveryRequest v-for="envio in envios" :key="envio.id" :envio="envio" />
+            <NotFound v-if="!envios.length">Ahora mismo no hay ningún envío para repartir</NotFound>
         </div>
     </div>
 </template>

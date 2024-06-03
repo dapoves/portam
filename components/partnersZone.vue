@@ -47,7 +47,7 @@
         </div>
 
         <div v-if="activeTab === 'active' && !pedidos.length" class="w-full max-w-4xl p-6 mx-auto">
-            <NotFound>pedidos pendientes</NotFound>
+            <NotFound>Aún no tienes pedidos pendientes</NotFound>
         </div>
 
         <div v-if="activeTab === 'past'" class="w-full max p-6 mx-auto">

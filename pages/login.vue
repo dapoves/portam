@@ -25,19 +25,7 @@
         <label for="password" class="mb-2 text-sm text-start text-grey-900">Contraseña*</label>
         <input id="password" type="password" placeholder="Ingresa tu contraseña"
           class="flex items-center w-full px-5 py-4 mb-5 mr-2 text-sm font-medium outline-none focus:bg-slate-100 placeholder:text-grey-700 bg-slate-100 text-dark-grey-900 rounded-2xl" />
-        <div class="flex flex-row justify-between mb-8">
-          <label class="relative inline-flex items-center mr-3 cursor-pointer select-none">
-            <input type="checkbox" checked value="" class="sr-only peer">
-            <div
-              class="w-5 h-5 bg-white border-2 rounded-sm border-slate-100 peer peer-checked:border-0 peer-checked:bg-purple-800">
-              <img class=""
-                src="https://raw.githubusercontent.com/Loopple/loopple-public-assets/main/motion-tailwind/img/icons/check.png"
-                alt="tick">
-            </div>
-            <span class="ml-3 text-sm font-normal text-grey-900">Mantener la sesión iniciada?</span>
-          </label>
-        </div>
-        <button class="w-full px-6 py-4 mx-auto mb-5 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-800 focus:ring-4 focus:bg-purple-900 bg-primary">Iniciar</button>
+        <button class="w-full px-6 py-4 mx-auto mb-5 mt-4 text-sm font-bold leading-none text-white transition duration-300 md:w-96 rounded-2xl hover:bg-purple-800 focus:ring-4 focus:bg-purple-900 bg-primary">Iniciar</button>
   
         <p class="text-sm leading-relaxed text-grey-900">No tienes cuenta? <NuxtLink to="register"
             class="font-bold text-purple-800">Registrate</NuxtLink></p>

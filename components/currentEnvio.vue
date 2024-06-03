@@ -1,4 +1,5 @@
 <template>
+    <div>
     <div v-for="envio in envios" class="bg-white rounded-lg shadow-md border p-6 mx-6 mb-6">
         <div class="flex items-center justify-between mb-4">
             <div>
@@ -41,7 +42,7 @@
                 <h3 class="text-md font-semibold">Fecha Aceptado</h3>
                 <p class="text-gray-500">{{ envio.fechaAceptado }}</p>
             </div>
-            <div>
+            <div class="col-span-2">
                 <h3 class="text-md font-semibold">Instrucciones</h3>
                 <p class="text-gray-500">{{ envio.indicaciones || 'Sin instrucciones' }}</p>
             </div>
@@ -53,17 +54,20 @@
                 <p class="text-primary font-semibold">{{ envio.precioTotal }}€</p>
             </div>
             <div class="flex items-center gap-2">
-                <button @click="entregarEnvio(envio)"
+                <button @click="entregarEnvio(envio)" v-if="envio.estado != 'entregado'"
                     class="bg-primary p-2 text-white rounded hover:bg-primary-dark flex items-center">
                     <IconCheckCheck color="white" />
                     <span class="ml-1">Entregado</span>
                 </button>
-                <button class=" text-white bg-red-500 hover:bg-red-600 p-2 rounded flex items-center">
+                <button @click="cancelarEnvio(envio)" v-if="envio.estado != 'entregado'"
+                class=" text-white bg-red-500 hover:bg-red-600 p-2 rounded flex items-center">
                     <IconCircleX color="white" />
-                    <span class="ml-1">Cancel</span>
+                    <span class="ml-1">Cancelar</span>
                 </button>
             </div>
         </div>
+    </div>
+    <NotFound v-if="!envios.length" >No tienes ningún envío aceptado ahora mismo</NotFound>
     </div>
 </template>
 
@@ -109,12 +113,29 @@ export default {
             }).then((result) => {
                 if (result.isConfirmed) {
                     RepartidorService.entregarEnvio(envio.id).then((response) => {
-                        console.log(response);
                         envio.estado = 'entregado';
                     });
                 }
             });
-
+        },
+        cancelarEnvio(envio) {
+            this.$swal({
+                title: '¿Seguro que quieres cancelar el envío?',
+                text: 'Quedará registrado en tu historial de envíos cancelados',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#9139BA',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, cancelar',
+                cancelButtonText: 'Volver'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    RepartidorService.cancelarEnvio(envio.id).then(() => {
+                        envio.estado = 'cancelado';
+                    });
+                    this.$swal('Cancelado', 'El envío ha sido cancelado', 'success');
+                }
+            });
         }
 
     }

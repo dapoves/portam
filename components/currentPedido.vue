@@ -39,6 +39,7 @@
                 </div>
             </div>
         </div>
+        <NotFound v-else >No estás repartiendo ningún pedido ahora mismo</NotFound>
     </div>
 </template>
 
@@ -64,20 +65,11 @@ export default {
     },
     mounted() {
         RepartidorService.getPedidoEnReparto(localStorage.getItem('user_id')).then((response) => {
-            if (response.data.message) {
-                this.$swal({
-                    title: 'Aún no has aceptado ningún pedido',
-                    text: '¡Acepta algún pedido y vuelve para ver los detalles y verificar la entrega!',
-                    icon: 'error',
-                    confirmButtonColor: '#9139BA',
-                    confirmButtonText: 'Aceptar',
-                });
-            } else {
+            if (!response.data.message) {
                 this.pedido = response.data;
                 EstablecimientoService.getEstablecimiento(this.pedido.establecimiento_id).then((response) => {
                     this.establecimiento = response.data;
                 });
-
                 UserService.getUser(this.pedido.cliente_id).then((response) => {
                     this.cliente = response.data;
                 });

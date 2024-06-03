@@ -31,10 +31,11 @@
             <p class="mt-6 mb-3 font-semibold text-[#171725]">Opciones de Pago</p>
             <div class="flex flex-wrap items-center justify-between cursor-pointer z-1" @click="toggleTarjetas">
                 <p class="mb-3 font-medium text-[#434E58]">Tarjeta</p>
-                <select v-model="tarjeta_id" class="max-w-full text-gray-800 mb-3 rounded-lg border border-gray-300 p-2">
+                <select v-if="tarjetas.length > 0" v-model="tarjeta_id" class="max-w-full text-gray-800 mb-3 rounded-lg border border-gray-300 p-2">
                     <option v-for="tarjeta in tarjetas" :value="tarjeta.id">{{ tarjetaOption(tarjeta) }}</option>
                 </select>
             </div>
+            <p class="text-primary text-right text-sm font-semibold underline cursor-pointer mb-3" @click="navigateTo('/paymentMethods')">Añadir método de pago</p>
             <hr class="border-t-2">
             <div class="flex justify-between mt-3">
                 <p class="mb-3 font-medium text-[#434E58]">Subtotal productos</p>
@@ -88,7 +89,6 @@ async function pagar() {
     pedido.append('precioTotal', precioTotal);
     pedido.append('direccion', direccion.value);
     pedido.append('indicaciones', indicacionesExtra.value);
-
     await PedidoService.createPedido(pedido).then((response) => {
         orderStore.setOrder(response.data.pedido);
     });
@@ -107,6 +107,7 @@ async function pagar() {
         showConfirmButton: false,
         timer: 2500
     });
+    orderStore.clearOrder();
 
     navigateTo('/myOrders');
 }

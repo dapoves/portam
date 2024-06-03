@@ -8,9 +8,9 @@
                 <h1 class="text-neutral-600 mb-1">Les valls </h1>
                 <IconChevronRight color="gray" stroke-width="2"/>
             </div>
-            <NuxtLink v-if="!isSocio" to="/deliverys">
+            <div v-if="!isSocio" @click="toDeliverys" class="cursor-pointer">
                 <IconBike :size="30"/>
-            </NuxtLink>
+            </div>
             <NuxtLink v-if="isSocio" to="/deliverys">
                 <IconScrollText :size="30"/>
             </NuxtLink>
@@ -26,7 +26,21 @@ export default {
        isSocio() {
            return isSocio();
        }
-   }
+   },
+    methods: {
+         toDeliverys() {
+              if (localStorage.getItem('user_role') === 'repartidor') {
+                  navigateTo('/deliverys');
+              } else {
+                this.$swal({
+                    title: 'Lo sentimos, no eres repartidor',
+                    text: 'No puedes acceder a esta sección',
+                    imageUrl: 'http://127.0.0.1:8000/storage/emojis/crying.png',
+                    imageAlt: 'Error Image'
+                });
+              }
+         }
+    }
 }
 </script>
 

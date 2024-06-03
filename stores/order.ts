@@ -24,6 +24,13 @@ export const useOrderStore = defineStore('order', {
     setOrder(order: any) {
       this.order = order
     },
+    clearOrder() {
+      this.products = ''
+      this.stablish = ''
+      this.subtotal = 0
+      this.costeEnvio = 0
+      this.order = {}
+    },
   }
   
 })

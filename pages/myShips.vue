@@ -16,9 +16,11 @@
         </div>
         <div v-if="activeTab === 'active'">
             <ShipCard v-for="envio in enviosActivos" :key="envio.id" :envio="envio" />
+            <NotFound v-if="!enviosActivos.length">No has solicitado ningún envío, ¿A qué esperas?</NotFound>
         </div>
         <div v-if="activeTab === 'past'">
             <ShipCard v-for="envio in enviosPasados" :key="envio.id" :envio="envio" />
+            <NotFound v-if="!enviosPasados.length">No has solicitado ningún envío, ¿A qué esperas?</NotFound>
         </div>
     </div>
 </template>
