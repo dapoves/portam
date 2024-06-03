@@ -1,29 +1,29 @@
 <template>
 <div class="relative px-6 max-w-lg mx-auto pb-4">
-    <div class="border bg-slate-800 rounded-lg shadow-lg p-4 pb-2 group transition-all duration-300">
+    <div class="bg-gray-100 rounded-lg p-4 pb-2 group transition-all duration-300">
     <div class="group-hover:opacity-20 transition-opacity duration-300">
         <div class="flex items-center mb-2">
             <IconLocate color="blue"/>
-            <p class="text-lg text-white font-semibold ml-1">{{ establecimiento.nombre }} <span class="text-xs font-light">{{ establecimiento.direccion }}</span></p>
+            <p class="text-lg  font-semibold ml-1">{{ establecimiento.nombre }} <span class="text-xs font-light">{{ establecimiento.direccion }}</span></p>
         </div>
         <div class="flex items-center mb-1 flex-wrap">
             <div class="flex items-center pr-8">
                 <IconMapPin color="red" :size="16" />
-                <p class="font-light text-white text-sm ml-1">{{ pedido.direccion }}</p>
+                <p class="font-light  text-sm ml-1">{{ pedido.direccion }}</p>
             </div>
             <div class="flex items-center">
                 <IconClock color="gray" :size="16" />
-                <p class="font-light text-white text-sm ml-1">Hace {{ tiempoPedido }} min</p>
+                <p class="font-light  text-sm ml-1">Hace {{ tiempoPedido }} min</p>
             </div>
         </div>
         <div class="flex items-center mb-2 flex-wrap">
             <div class="flex items-center pr-8 mb-1">
                 <IconListChecks color="gray" :size="16" />
-                <p class="font-light text-white text-sm ml-1"><span class="font-normal">Indicaciones: </span>{{ pedido.indicaciones }}</p>
+                <p class="font-light  text-sm ml-1"><span class="font-normal">Indicaciones: </span>{{ pedido.indicaciones }}</p>
             </div>
             <div class="flex items-center">
                 <IconShoppingBasket color="gray" :size="16" />
-                <p class="font-light text-white text-sm ml-1">{{ productos.map(producto => producto.nombre).join(', ') }}</p>
+                <p class="font-light  text-sm ml-1">{{ productos.map(producto => producto.nombre).join(', ') }}</p>
             </div>
         </div>
     </div>

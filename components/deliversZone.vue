@@ -18,7 +18,7 @@
             <OrderRequest v-for="pedido in pedidos" :key="pedido.id" :pedido="pedido" />
         </div>
         <div v-if="activeTab === 'past'">
-            {{ envios }}
+            <DeliveryRequest v-for="envio in envios" :key="envio.id" :envio="envio" />
         </div>
     </div>
 </template>

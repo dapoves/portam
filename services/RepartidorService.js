@@ -22,4 +22,16 @@ export default {
     cancelarPedido(id) {
         return apiClient.post('/pedidos/cancelar-entrega/' + id)
     },
+    repartirEnvio(data) {
+        return apiClient.post('/envios/repartir', data)
+    },
+    getEnviosEnReparto(id) {
+        return apiClient.get('/envios/reparto/' + id)
+    },
+    recogerEnvio(id) {
+        return apiClient.post('/envios/recoger/' + id)
+    },
+    entregarEnvio(id) {
+        return apiClient.post('/envios/entregar/' + id)
+    }
 }

@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <div class="flex justify-center">
     <div class="flex justify-between p-9 px-6 w-full h-full absolute top-0 bg-primary z-10">
       <NuxtLink @click="$router.go(-1)" class="cursor-pointer">
         <IconChevronLeft stroke-width="3" color="white" :size="28" />
       </NuxtLink>
-      <p class="text-2xl mt-10 text-white font-semibold">¡Hola {{ username }}!</p>
+      <p class="text-2xl mt-10 text-white font-semibold text-center">¡Hola {{ username }}!</p>
       <NuxtLink @click="$router.go(-1)" class="opacity-0">
         <IconChevronLeft stroke-width="3" color="white" :size="28" />
       </NuxtLink>
     </div>
-    <div class="bg-white h-full w-full mt-32 absolute z-20 rounded-t-3xl ">
+    <div class="bg-white h-full w-full max-w-screen-md mt-32 absolute z-20 rounded-t-3xl mx-auto">
       <NuxtLink to="/account" class="flex px-6 py-4  border-b border-gray-200">
         <IconCircleUserRound color="#9139BA" />
         <p class="pl-4">Cuenta</p>
