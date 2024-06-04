@@ -43,7 +43,7 @@
             <hr class="border-t-2">
             <div class="flex justify-between mt-3">
                 <p class="mb-3 font-medium text-[#434E58]">Subtotal productos</p>
-                <p class="font-semibold text-[#434E58]">{{ orderStore.subtotal }}€</p>
+                <p class="font-semibold text-[#434E58]">{{ orderStore.subtotal.toFixed(2) }}€</p>
             </div>
             <div class="flex justify-between">
                 <p class="mb-3 font-medium text-[#434E58]">Costes de envío</p>
@@ -98,22 +98,22 @@ async function pagar() {
         orderStore.setOrder(response.data.pedido);
 
         orderStore.products.forEach((product) => {
-        let pedidoProducto = new FormData();
-        pedidoProducto.append('pedido_id', orderStore.order.id);
-        pedidoProducto.append('producto_id', product.id);
-        PedidoService.addProduto(pedidoProducto);
-    });
+            let pedidoProducto = new FormData();
+            pedidoProducto.append('pedido_id', orderStore.order.id);
+            pedidoProducto.append('producto_id', product.id);
+            PedidoService.addProduto(pedidoProducto);
+        });
 
-    Swal.fire({
-        title: 'Pedido realizado',
-        text: 'Tu pedido ha sido realizado con éxito y esta pendiente de ser aceptado por parte del establecimiento',
-        icon: 'success',
-        showConfirmButton: false,
-        timer: 2500
-    });
-    orderStore.clearOrder();
+        Swal.fire({
+            title: 'Pedido realizado',
+            text: 'Tu pedido ha sido realizado con éxito y esta pendiente de ser aceptado por parte del establecimiento',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2500
+        });
+        orderStore.clearOrder();
 
-    navigateTo('/myOrders');
+        navigateTo('/myOrders');
     }).catch((error) => {
         Swal.fire('Error', error.response.data.message, 'error');
     });

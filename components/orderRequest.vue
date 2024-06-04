@@ -23,7 +23,9 @@
             </div>
             <div class="flex items-center">
                 <IconShoppingBasket color="gray" :size="16" />
-                <p class="font-light  text-sm ml-1">{{ productos.map(producto => producto.nombre).join(', ') }}</p>
+                <p class="font-light  text-sm ml-1" v-for="producto in productos" :key="producto.id">
+                    {{ producto.nombre }} ({{ producto.pivot.cantidad }}), 
+                </p>
             </div>
         </div>
     </div>

@@ -20,7 +20,7 @@
                         <img :src="imagenUrl(producto)" :alt="producto.nombre"
                             class="w-14 h-14 md:w-20 md:h-20 rounded-lg object-cover">
                         <div class="space-y-1">
-                            <p class="font-semibold">{{ producto.nombre }}</p>
+                            <p class="font-semibold">{{ producto.nombre }} <span class="m-2 font-medium text-lg" v-if="producto.pivot.cantidad > 1"> x{{ producto.pivot.cantidad }}</span> </p>
                             <p class="text-sm md:block hidden">{{ producto.descripcion }}</p>
                         </div>
                     </div>

@@ -3,7 +3,7 @@
     <div class="flex items-start space-x-4 p-4 px-6 bg-white">
         <img :src="imagenUrl(props.product)" :alt="props.product.nombre" class="w-20 h-20 rounded-lg object-cover">
         <div class="space-y-1">
-            <p class="font-bold text-lg">{{ props.product.nombre }}</p>
+            <p class="font-bold text-lg"> {{ props.product.nombre }} <span class="text-xl font-medium m-4" v-if="props.product.pivot.cantidad > 1">x{{ props.product.pivot.cantidad }}</span></p>
             <p class="font-semibold text-purple-800 text-sm">{{ props.product.precio }}€</p>
         </div>
     </div>
