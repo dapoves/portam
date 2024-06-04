@@ -87,6 +87,8 @@ export default {
                    data.append('pedido_id', this.pedido.id);
                    data.append('repartidor_id', localStorage.getItem('user_id')); 
                    RepartidorService.repartirPedido(data).then((response) => {
+                        
+                    if(response.data.status === 'ok') {
                         this.$swal({
                             title: response.data.message,
                             text: `Dirígete a ${this.establecimiento.nombre}, ${this.establecimiento.direccion} para recoger el pedido.`,
@@ -95,6 +97,14 @@ export default {
                             timer: 2000,
                         });
                         navigateTo('/currentDelivery');
+                    } else {
+                        this.$swal({
+                            title: response.data.message,
+                            icon: 'error',
+                            showConfirmButton: false,
+                            timer: 2000,
+                        });
+                    }
                    });
                 } 
             });

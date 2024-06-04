@@ -49,6 +49,7 @@
                 <IconEdit color="white" size="35" stroke-width="3" />
             </div>
         </div>
+        <NotFound v-if="!tarjetas.length">No tienes tarjetas añadidas</NotFound>
     </div>
 </template>
 <script>
