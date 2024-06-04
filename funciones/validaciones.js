@@ -25,3 +25,8 @@ export function validarTelefono(telefono) {
     const re = /^\d+$/;
     return telefono.length === 9 && re.test(telefono);
 }
+
+export function validarDireccion(direccion) {
+    const palabras = direccion.split(' ');
+    return palabras.length >= 3;
+}

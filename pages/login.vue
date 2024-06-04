@@ -71,7 +71,7 @@
               this.$swal('Error', error.response.data.message, 'error');
             });
         } else {
-          this.$swal('Error', 'Por favor, revisa los campos', 'error');
+          this.$swal('Error', 'Por favor, revisa los campos', 'error'); 
         }
     },
     validarEmail,

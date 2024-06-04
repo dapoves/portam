@@ -143,6 +143,9 @@ export default {
                             });
                             this.tarjetas.push(response.data.tarjeta);
                         }
+                    })
+                    .catch(error => {
+                        this.$swal('Error', error.response.data.message, 'error');
                     });
                 }
             });
