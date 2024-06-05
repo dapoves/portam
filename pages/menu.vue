@@ -61,25 +61,31 @@ export default {
   },
   methods: {
     logout() {
-      localStorage.clear();
+      if (typeof window !== 'undefined') {
+        localStorage.clear();
+      }
       this.$router.push('/login');
     },
     toDeliverys() {
-       if (localStorage.getItem('user_role') === 'repartidor' || localStorage.getItem('user_role') === 'socio'){
-           navigateTo('/deliverys');
-       } else {
-         this.$swal({
-             title: 'Lo sentimos, no eres repartidor',
-             text: 'No puedes acceder a esta sección',
-             imageUrl: 'http://127.0.0.1:8000/storage/emojis/crying.png',
-             imageAlt: 'Error Image'
-         });
-       }
-  }
+      if (isSocio || isRepartidor) {
+        navigateTo('/deliverys');
+      } else {
+        this.$swal({
+          title: 'Lo sentimos, no eres repartidor',
+          text: 'No puedes acceder a esta sección',
+          imageUrl: 'http://127.0.0.1:8000/storage/emojis/crying.png',
+          imageAlt: 'Error Image'
+        });
+      }
+    }
   },
   computed: {
     username() {
-      return localStorage.getItem('user_name');
+      if (typeof window !== 'undefined') {
+        return localStorage.getItem('user_name');
+      } else {
+        return null;
+      }
     },
     isRepartidor() {
       return isRepartidor();

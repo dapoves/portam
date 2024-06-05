@@ -1,7 +1,15 @@
 export function isRepartidor() {
-  return localStorage.getItem('user_role') === 'repartidor';
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('user_role') === 'repartidor';
+  } else {
+    return false;
+  }
 }
 
 export function isSocio() {
-  return localStorage.getItem('user_role') === 'socio';
+  if (typeof window !== 'undefined') {
+    return localStorage.getItem('user_role') === 'socio';
+  } else {
+    return false;
+  }
 }
