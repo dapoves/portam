@@ -45,6 +45,18 @@ export default {
     },
     setOnTheWay(id) {
         return apiClient.post('/pedidos/on-the-way/' + id)
-    }
+    },
+    updateEstablecimiento(id, data) {
+        return apiClient.post('/establecimientos/' + id, data)
+    },
+    updateProducto(id, data) {
+        return apiClient.post('/productos/' + id, data)
+    },
+    createProducto(data) {
+        return apiClient.post('/productos', data)
+    },
+    deleteProducto(id) {
+        return apiClient.delete('/productos/' + id)
+    },
 }
     

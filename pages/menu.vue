@@ -34,6 +34,10 @@
         <p v-if="isSocio" class="font-semibold">Área de pedidos</p>
         <p v-else class="font-semibold">Área de repartidor</p>
       </div>
+      <NuxtLink v-if="isSocio" to="/adminStablish" class="flex px-6 py-4  border-b border-gray-200">
+        <IconStore color="#9139BA" />
+        <p class="pl-4">Administración</p>
+      </NuxtLink>
       <NuxtLink v-if="isRepartidor" to="/currentDelivery" class="flex px-6 py-4  border-b border-gray-200">
         <IconRadar color="#9139BA" />
         <p class="pl-4">Entrega en Curso</p>
