@@ -23,7 +23,7 @@ import { ref, onMounted } from 'vue';
 import CatService from '@/services/EstablecimientoService'
 
 let categories = ref([]);
-const baseUrl = 'http://127.0.0.1:8000/storage/categorias/';
+const baseUrl = 'https://damian.jdfs.dev/storage/categorias/';
 
 function imagenUrl(category) {
   return baseUrl + category.imagen;

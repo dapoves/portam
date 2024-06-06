@@ -15,7 +15,7 @@ const props = defineProps({
   product: Object
 }) 
 
-const baseUrl = 'http://127.0.0.1:8000/storage/productos/';
+const baseUrl = 'https://damian.jdfs.dev/storage/productos/';
 
 function imagenUrl(product) {
   return baseUrl + product.imagen;

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div>
-            <img class="w-full h-40 object-cover absolute top-0" :src="`http://127.0.0.1:8000/storage/establecimientos/`+ stablish.imagen" />
+            <img class="w-full h-40 object-cover absolute top-0" :src="`https://damian.jdfs.dev/storage/establecimientos/`+ stablish.imagen" />
             <nav
                 class="mt-20 flex justify-between sticky top-0 z-10 block w-full max-w-full rounded-t-3xl px-4 py-8 bg-white h-max backdrop-blur-2xl backdrop-saturate-200 lg:px-8 lg:py-6">
                 <NuxtLink @click="$router.go(-1)" class="cursor-pointer">
@@ -15,7 +15,7 @@
             <div v-for="product in products" :key="product.id"
                 class="group relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md transition-all duration-200">
                 <div class='h-[120px] rounded-t-xl transition-all duration-200 group-hover:opacity-50'
-                    :style="'background-image:url(http://127.0.0.1:8000/storage/productos/' + product.imagen + ');background-size:cover;background-position:center'">
+                    :style="'background-image:url(https://damian.jdfs.dev/storage/productos/' + product.imagen + ');background-size:cover;background-position:center'">
                 </div>
 
                 <div class="p-4 group-hover:opacity-50 transition-all duration-200">

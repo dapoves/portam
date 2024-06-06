@@ -60,7 +60,7 @@
                     @mouseup="stopHold" @mouseleave="stopHold"
                     class="producto group relative flex flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md ">
                     <div @click="updateImagenProduct(product.id)" class='h-[120px] rounded-t-xl cursor-pointer'
-                        :style="'background-image:url(http://127.0.0.1:8000/storage/productos/' + product.imagen + ');background-size:cover;background-position:center'">
+                        :style="'background-image:url(https://damian.jdfs.dev/storage/productos/' + product.imagen + ');background-size:cover;background-position:center'">
                     </div>
 
                     <div class="p-4 ">
@@ -116,7 +116,7 @@ export default {
     },
     computed: {
         stablishImagen() {
-            const baseUrl = 'http://127.0.0.1:8000/storage/establecimientos/';
+            const baseUrl = 'https://damian.jdfs.dev/storage/establecimientos/';
             return this.stablishment.imagen ? baseUrl + this.stablishment.imagen : 'https://via.placeholder.com/150';
         }
     },

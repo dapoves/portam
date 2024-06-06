@@ -73,7 +73,7 @@ export default {
         this.$swal({
           title: 'Lo sentimos, no eres repartidor',
           text: 'No puedes acceder a esta sección',
-          imageUrl: 'http://127.0.0.1:8000/storage/emojis/crying.png',
+          imageUrl: 'https://damian.jdfs.dev/storage/emojis/crying.png',
           imageAlt: 'Error Image'
         });
       }

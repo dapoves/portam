@@ -45,7 +45,7 @@ import PedidoService from '~/services/PedidoService';
 import EstablecimientoService from '~/services/EstablecimientoService';
 
 const route = useRoute();
-const stablishUrl = 'http://127.0.0.1:8000/storage/establecimientos/';
+const stablishUrl = 'https://damian.jdfs.dev/storage/establecimientos/';
 let pedido = ref({});
 let stablish = ref({});
 let products = ref([]);

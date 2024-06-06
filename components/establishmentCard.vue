@@ -30,7 +30,7 @@ const props = defineProps({
   stablish: Object
 })
 
-const baseUrl = 'http://127.0.0.1:8000/storage/establecimientos/';
+const baseUrl = 'https://damian.jdfs.dev/storage/establecimientos/';
 let imagenUrl = baseUrl + props.stablish.imagen;
 let poblacion = ref('');
 

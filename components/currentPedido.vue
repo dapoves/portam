@@ -82,7 +82,7 @@ export default {
     },
     methods: {
         imagenUrl(producto) {
-            return `http://127.0.0.1:8000/storage/productos/` + producto.imagen;
+            return `https://damian.jdfs.dev/storage/productos/` + producto.imagen;
         },
         entregarPedido() {
             this.$swal({

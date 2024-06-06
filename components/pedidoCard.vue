@@ -57,7 +57,7 @@ import EstablecimientoService from '~/services/EstablecimientoService';
 const props = defineProps({
     pedido: Object
 })
-const baseUrl = 'http://127.0.0.1:8000/storage/establecimientos/';
+const baseUrl = 'https://damian.jdfs.dev/storage/establecimientos/';
 let fecha = new Date(props.pedido.fechaPedido);
 let today = new Date();
 let isToday = fecha.toDateString() === today.toDateString();

@@ -10,7 +10,7 @@
                             <p class="block text-sm font-light">Número Tarjeta</p>
                             <p class="text-xl font-semibold tracking-widest">{{ tarjeta.numero }}</p>
                         </div>
-                        <img :src="`http://127.0.0.1:8000/storage/tarjetas/${tarjeta.tipo}.png`" alt="Card Logo"
+                        <img :src="`https://damian.jdfs.dev/storage/tarjetas/${tarjeta.tipo}.png`" alt="Card Logo"
                             class="h-10">
                     </div>
                     <div class="mt-1">
