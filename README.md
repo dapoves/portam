@@ -1,10 +1,9 @@
-# Nuxt 3 Minimal Starter
-
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+# Portam Delivery
+Este es el repositorio front elaborado con Nuxt del proyecto Portam Delivery. Proporciona la interfaz para el cliente, el repartidor y el establecimiento, comunicándose con la API.
 
 ## Setup
 
-Make sure to install the dependencies:
+Asegúrate de instalar las dependencias:
 
 ```bash
 # npm
@@ -20,9 +19,9 @@ yarn install
 bun install
 ```
 
-## Development Server
+## Servidor de Desarrollo
 
-Start the development server on `http://localhost:3000`:
+Inicia el servidor de desarrollo en http://localhost:3000:
 
 ```bash
 # npm
@@ -38,9 +37,8 @@ yarn dev
 bun run dev
 ```
 
-## Production
-
-Build the application for production:
+## Producción
+Construye la aplicación para producción:
 
 ```bash
 # npm
@@ -56,7 +54,7 @@ yarn build
 bun run build
 ```
 
-Locally preview production build:
+## Previsualiza la construcción de producción localmente:
 
 ```bash
 # npm
@@ -72,4 +70,4 @@ yarn preview
 bun run preview
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+Consulta la [documentación de implementación](https://nuxt.com/docs/getting-started/deployment) para más información.
