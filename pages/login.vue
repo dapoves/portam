@@ -68,7 +68,7 @@
               }
             })
             .catch(error => {
-              this.$swal('Error', error.response.data.message, 'error');
+              this.$swal('Error', error.response.data.message.split('.')[0], 'error');
             });
         } else {
           this.$swal('Error', 'Por favor, revisa los campos', 'error'); 

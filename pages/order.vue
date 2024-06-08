@@ -115,7 +115,7 @@ async function pagar() {
 
         navigateTo('/myOrders');
     }).catch((error) => {
-        Swal.fire('Error', error.response.data.message, 'error');
+        Swal.fire('Error', error.response.data.message.split('.')[0], 'error');
     });
 }
 

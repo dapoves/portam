@@ -185,7 +185,7 @@ export default {
                     });
                 }
             }).catch((error) => {
-                console.log(error.response.data.message);
+                console.log(error.response.data.message.split('.')[0]);
             });
 
         }
