@@ -4,8 +4,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
   if (typeof window !== 'undefined') {
     if (!excludedRoutes.includes(to.name) && localStorage.getItem('user_id') === null) {
-      window.location.reload();
-      return navigateTo('/login');
+      return navigateTo('/login')
     }
   }
 })

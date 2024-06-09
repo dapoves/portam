@@ -23,14 +23,6 @@ function getEstablishments() {
   });
 }
 
-function checkAuth() {
-  LoginService.isAuthenticated().then((response) => {
-    console.log(response);
-  });
-}
-
-onMounted(checkAuth);
-
 onMounted(getEstablishments);
 </script>
 
