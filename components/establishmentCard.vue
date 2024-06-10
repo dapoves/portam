@@ -15,7 +15,7 @@
               <IconStar :size="20" class='mt-3 mr-1 text-yellow-400' fill="#facc15" />
               <p class='mt-3 text-base'>Likes</p> -->
             </div>
-            <IconHeart :size="20" class='mt-3 mr-1 text-purple-800' fill="#6b21a8" />
+            <IconHeart :size="20" class='mt-3 mr-1 text-purple-800' fill="#6b21a8" @click="meGusta" />
           </div>
         </div>
       </div>

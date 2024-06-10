@@ -58,5 +58,8 @@ export default {
     deleteProducto(id) {
         return apiClient.delete('/productos/' + id)
     },
+    setLike(id) {
+        return apiClient.post('/establecimientos/' + id + '/like')
+    },
 }
     
