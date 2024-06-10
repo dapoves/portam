@@ -58,8 +58,14 @@ export default {
     deleteProducto(id) {
         return apiClient.delete('/productos/' + id)
     },
-    setLike(id) {
-        return apiClient.post('/establecimientos/' + id + '/like')
+    addLike(data) {
+        return apiClient.post('/establecimientos/addLike', data)
     },
+    isLiked(idUsuario, idEstablecimiento) {
+        return apiClient.get('/establecimientos/favoritos/' + idUsuario + '/' + idEstablecimiento)
+    },
+    getFavoritos(id) {
+        return apiClient.get('/establecimientos/favoritos/' + id)
+    }
 }
     

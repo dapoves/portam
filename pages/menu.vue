@@ -22,7 +22,7 @@
         <IconCreditCard color="#9139BA" />
         <p class="pl-4">Métodos de pago</p>
       </NuxtLink>
-      <NuxtLink class="flex px-6 py-4  border-b border-gray-200">
+      <NuxtLink :to="`/favoritos/${user}`" class="flex px-6 py-4  border-b border-gray-200">
         <IconThumbsUp color="#9139BA" />
         <p class="pl-4">Favoritos</p>
       </NuxtLink>
@@ -79,6 +79,13 @@ export default {
     username() {
       if (typeof window !== 'undefined') {
         return localStorage.getItem('user_name');
+      } else {
+        return null;
+      }
+    },
+    user() {
+      if (typeof window !== 'undefined') {
+        return JSON.parse(localStorage.getItem('user_id'));
       } else {
         return null;
       }
