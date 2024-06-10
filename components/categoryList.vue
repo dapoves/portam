@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="m-6 mb-4 p-2 flex overflow-x-auto space-x-4 hide-scrollbar flex md:justify-between">
-      <div v-for="(category, index) in categories" :key="index"
+      <div v-for="(category, index) in categories" :key="index" @click="selectCategory(category)"
         class="flex flex-col items-center min-w-[80px] md:min-w-[100px] text-center transform transition-transform duration-200 hover:scale-105 cursor-pointer">
         <img :src="imagenUrl(category)" :alt="category.nombre" class="w-14 h-14 md:w-16 md:h-16 object-cover">
         <p class="font-semibold text-center mt-2 text-gray-800 text-sm max-w-[96px] md:max-w-[115px] break-words">{{ category.nombre }}</p>
@@ -21,6 +21,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import CatService from '@/services/EstablecimientoService'
+import { useEstablecimientoStore } from '~/stores/establecimientos';
 
 let categories = ref([]);
 const baseUrl = 'https://damian.jdfs.dev/storage/categorias/';
@@ -38,6 +39,12 @@ function getCategories() {
       }
     });
   });
+}
+
+const categoryStore = useEstablecimientoStore();
+
+function selectCategory(category) {
+  categoryStore.setSelectedCategory(category)
 }
 
 onMounted(getCategories);

@@ -2,26 +2,33 @@
   <div>
     <IndexHeader></IndexHeader>
     <CategoryList></CategoryList>
-    <EstablishmentCard v-for="stablish in stablishments" :key="stablish.id" :stablish="stablish"></EstablishmentCard>
+    <EstablishmentCard v-for="stablish in filteredStablishments" :key="stablish.id" :stablish="stablish"></EstablishmentCard>
   </div>
 </template>
 
 <script setup>
 import { onMounted, ref } from 'vue';
 import EstablecimientoService from '@/services/EstablecimientoService';
-import LoginService from '@/services/LoginService';
-
-// definePageMeta({
-//    middleware: 'auth'
-//  })
+import { useEstablecimientoStore } from '~/stores/establecimientos';
 
 let stablishments = ref([]);
+const establecimientoStore = useEstablecimientoStore();
 
 function getEstablishments() {
   EstablecimientoService.getEstablecimientos().then((response) => {
     stablishments.value = response.data;
   });
 }
+
+const filteredStablishments = computed(() => {
+  if (establecimientoStore.selectedCategory == '') {
+    return stablishments.value;
+  }
+  return stablishments.value.filter(
+    (stablish) => stablish.categoria_id === establecimientoStore.selectedCategory.id
+  );
+});
+
 
 onMounted(getEstablishments);
 </script>

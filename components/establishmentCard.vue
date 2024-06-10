@@ -11,9 +11,9 @@
             <div class='flex'>
               <IconMapPin :size="20" class='mt-3 mr-1' />
               <p class='mt-3 text-base'>{{ poblacion }}</p>
-              <p class='mt-3 ml-2 mr-2 text-base'> | </p>
+              <!-- <p class='mt-3 ml-2 mr-2 text-base'> | </p>
               <IconStar :size="20" class='mt-3 mr-1 text-yellow-400' fill="#facc15" />
-              <p class='mt-3 text-base'>Likes</p>
+              <p class='mt-3 text-base'>Likes</p> -->
             </div>
             <IconHeart :size="20" class='mt-3 mr-1 text-purple-800' fill="#6b21a8" />
           </div>
