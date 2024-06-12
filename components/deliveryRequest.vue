@@ -131,7 +131,7 @@ export default {
         this.tipo = this.envio.tipo.charAt(0).toUpperCase() + this.envio.tipo.slice(1);
         switch(this.envio.espera) {
             case 'antes posible':
-                this.envio.espera = ', para lo antes posible';
+                this.envio.espera = 'para lo antes posible';
                 break;
             case 'hoy':
                 this.envio.espera = 'para hoy';
