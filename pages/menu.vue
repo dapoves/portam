@@ -26,7 +26,7 @@
         <IconThumbsUp color="#9139BA" />
         <p class="pl-4">Favoritos</p>
       </NuxtLink>
-      <div class="px-6 py-2 bg-purple-300 border-b border-gray-200 cursor-pointer" @click="toDeliverys">
+      <div v-if="isSocio || isRepartidor" class="px-6 py-2 bg-purple-300 border-b border-gray-200 cursor-pointer" @click="toDeliverys">
         <p v-if="isSocio" class="font-semibold">Área de pedidos</p>
         <p v-else class="font-semibold">Área de repartidor</p>
       </div>
